@@ -32,6 +32,7 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+  font-family: var(--font-geist-sans);
 }
 
 .main ol {
@@ -68,10 +69,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -165,4 +163,24 @@ a.secondary {
   .logo {
     filter: invert();
   }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #172b4d;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+.description {
+  text-align: center;
+  color: #172b4d;
 }
