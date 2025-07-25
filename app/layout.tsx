@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       {
         url: "underconstruction-img-not-transparent.jpg",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "Pixelfreight under construction",
       },
     ],
