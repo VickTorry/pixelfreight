@@ -99,7 +99,7 @@ export default function ContactForm({
           </div>
         )}
         <button type="submit" disabled={submitting} className={styles.submitButton}>
-          {submitting ? "Sending..." : "Keep Me Posted"}
+          {submitting ? "Sending..." : "Send"}
         </button>
       </form>
     </div>

@@ -9,10 +9,7 @@ export default function UnderConstruction() {
       <div className={styles.layout}>
         <div className={styles.content}>
           <h1 className={styles.logo}>PIXELFREIGHT</h1>
-          <h2 className={styles.heading}>Under Construction</h2>
-          <p className={styles.subheading}>
-            We&apos;re working on something new. Be the first to know—join our mailing list.
-          </p>
+          <h2 className={styles.heading}>Under construction</h2>
           <div className={styles.formWrapper}>
             <ContactForm />
           </div>
@@ -20,7 +17,7 @@ export default function UnderConstruction() {
 
         <div className={styles.imageWrapper}>
           <Image
-            src="/under-construction-image.png"
+            src="/underconstruction-img.webp"
             alt="Pixelfreight crane lifting logo"
             width={700}
             height={700}
