@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     siteName: "Pixelfreight",
     images: [
       {
-        url: "underconstruction-img-not-transparent.jpg",
+        url: "underconstruction-img-1200-630 (1).jpg",
         width: 1200,
-        height: 1200,
+        height: 630,
         alt: "Pixelfreight under construction",
       },
     ],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pixelfreight — Under Construction",
     description: "We’re almost there. Get notified when we launch.",
-    images: ["underconstruction-img-not-transparent.jpg"],
+    images: ["underconstruction-img-1200-630 (1).jpg"],
   },
 };
 
