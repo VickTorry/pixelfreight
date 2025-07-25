@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Pixelfreight",
     images: [
       {
-        url: "underconstruction-img.webp", 
+        url: "underconstruction-img (10).png", 
         width: 1200,
         height: 630,
         alt: "Pixelfreight under construction",
