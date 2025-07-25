@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pixelfreight — Under Construction",
     description: "We’re almost there. Get notified when we launch.",
-    images: ["underconstruction-img.webp"],
+    images: ["underconstruction-img (1).png"],
   },
 };
 
