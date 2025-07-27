@@ -1,3 +1,5 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -15,6 +17,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pixelfreight — Under Construction",
   description: "We're building something exciting. Leave your email to stay updated!",
+  icons: {
+    icon: [
+      { url: "/favicon-light.ico", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-dark.ico", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
   openGraph: {
     title: "Pixelfreight — Under Construction",
     description: "We’re almost there. Get notified when we launch.",
