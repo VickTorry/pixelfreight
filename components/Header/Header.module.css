@@ -5,10 +5,6 @@
 
 /* Global helpers so content doesn't hide behind fixed header */
 
-:global(body) {
-  padding-top: var(--hdr-h);
-}
-
 /* ---------- Header container ---------- */
 .header {
   position: fixed;
