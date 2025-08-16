@@ -1,0 +1,64 @@
+.section {
+  padding: 4rem 1rem;
+  background-color: #fdfcfb; /* Optional light background */
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.heading {
+  font-family: "Geist", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #1f1f1f;
+}
+
+.benefitList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.benefitItem {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.benefitIcon {
+  background-color: #0f667b;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  font-family: "Geist", sans-serif;
+  font-weight: bold;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.benefitContent {
+  flex: 1;
+}
+
+.benefitTitle {
+  font-family: "Geist", sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #1f1f1f;
+  margin-bottom: 0.5rem;
+}
+
+.benefitDescription {
+  font-family: "Geist", sans-serif;
+  color: rgba(31, 31, 31, 0.7);
+  line-height: 1.6;
+}

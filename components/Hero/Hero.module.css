@@ -1,0 +1,79 @@
+.section {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/hero-light.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.darkOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("/hero-dark.png");
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+
+:global(html.dark) .darkOverlay {
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+:global(html.dark) .overlay {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.content {
+  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.headline {
+  font-family: "Geist", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #111827;
+}
+
+@media (min-width: 768px) {
+  .headline {
+    font-size: 4.5rem;
+  }
+}
+
+.primaryHighlight {
+  color: #1d4ed8;
+}
+
+.subheadline {
+  font-family: "Geist", sans-serif;
+  font-size: 1.25rem;
+  color: rgba(17, 17, 17, 0.8);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .subheadline {
+    font-size: 1.5rem;
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

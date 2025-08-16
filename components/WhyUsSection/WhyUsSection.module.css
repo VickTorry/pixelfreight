@@ -1,0 +1,93 @@
+.section {
+  padding: 5rem 0;
+  background-color: #faf8f6;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.listItem {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.badge {
+  background-color: #0ea5e9; /* primary */
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.itemTitle {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.itemDesc {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* As seen on block */
+.asSeenOn {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.asSeenLabel {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.asSeenLogos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0.6;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.125rem;
+}

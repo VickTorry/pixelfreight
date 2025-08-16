@@ -1,0 +1,179 @@
+.section {
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 4rem 0 2rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Top row layout */
+.topRow {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .topRow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Brand */
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+}
+
+.logoText {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.tagline {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* Headings */
+.heading {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Navigation */
+.nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.link {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #f8fafc;
+}
+
+/* Contact */
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #38bdf8;
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Form */
+.formWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid #334155;
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #94a3b8;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background-color: #0f172a;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.button {
+  background-color: #38bdf8;
+  color: #0f172a;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #0ea5e9;
+}
+
+/* Bottom */
+.bottom {
+  border-top: 1px solid rgba(248, 250, 252, 0.15);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .bottom {
+    flex-direction: row;
+  }
+}
+
+.copy {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.linkSmall {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.linkSmall:hover {
+  color: #f8fafc;
+}

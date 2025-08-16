@@ -1,0 +1,50 @@
+.section {
+  padding: 5rem 0;
+  background-color: #fefefc; /* light background, matching other sections */
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.inner {
+  max-width: 768px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 2.25rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.button {
+  font-size: 1.125rem;
+  padding: 1.25rem 2rem;
+  background-color: #0f172a; /* primary */
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #1e293b; /* hover color */
+}

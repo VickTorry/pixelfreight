@@ -1,0 +1,21 @@
+.toggleButton {
+  height: 2.25rem; /* h-9 */
+  width: 2.25rem; /* w-9 */
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.toggleButton:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* mimic 'hover:bg-muted' */
+}
+
+.icon {
+  width: 1rem; /* h-4 w-4 */
+  height: 1rem;
+}
