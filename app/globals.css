@@ -67,3 +67,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+:global(:root) {
+  --hdr-h: 64px;
+}

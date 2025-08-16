@@ -4,9 +4,7 @@
    ============================ */
 
 /* Global helpers so content doesn't hide behind fixed header */
-:global(:root) {
-  --hdr-h: 64px; /* header/nav height */
-}
+
 :global(body) {
   padding-top: var(--hdr-h);
 }
