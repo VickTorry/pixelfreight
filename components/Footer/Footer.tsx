@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";          // NEW
+import { submitToSheet } from "@/lib/submitToSheet";        // NEW
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -26,22 +28,62 @@ export function Footer() {
     { name: "Terms of Use", href: "#" },
   ];
 
+  // footer form -> email + message (map to sheet fields)
   const [form, setForm] = useState({ email: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    setForm({ email: "", message: "" });
-    alert("Thanks! We'll get back to you soon.");
+
+    // simple validation (mirrors ContactForm style)
+    if (!form.email.trim()) {
+      toast.error("Please enter your email.");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(form.email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    if (!form.message.trim()) {
+      toast.error("Please write a short message.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      // Map to the same fields your ContactForm uses
+      // (name is optional here; we pass a marker)
+      const payload = {
+        name: "Footer form",              // or leave "" if your sheet allows
+        email: form.email,
+        comments: form.message,
+        source: "footer",                 // optional: helps you segment
+      };
+
+      const ok = await submitToSheet(payload);
+      if (!ok) throw new Error("Failed to submit");
+
+      toast.success("Sent!");
+      setForm({ email: "", message: "" }); // clear fields
+      setSubmitted(true);                   // show inline thank-you
+    } catch (err) {
+      console.error(err);
+      toast.error("Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <footer className={styles.section}>
       <div className={styles.container}>
+        <Toaster position="top-center" /> {/* toast like the other form */}
+
         {/* Top row */}
         <div className={styles.topRow}>
           {/* Brand */}
@@ -97,40 +139,56 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Form (lower-right) */}
           <div className={styles.formWrap}>
             <h4 className={styles.heading}>Get in touch</h4>
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <input
-                type="email"
-                name="email"
-                placeholder="Your email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className={styles.input}
-              />
-              <textarea
-                name="message"
-                placeholder="Your message"
-                value={form.message}
-                onChange={handleChange}
-                rows={4}
-                required
-                className={styles.textarea}
-              />
-              <button type="submit" className={styles.button}>
-                Send Message
-              </button>
-            </form>
+
+            {/* Show thank-you inline after success */}
+            {submitted ? (
+              <div className={styles.thankYou}>
+                <p>Thank you! We&apos;ll be in touch soon.</p>
+                <button
+                  className={styles.buttonGhost}
+                  onClick={() => setSubmitted(false)}
+                >
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email *"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  className={styles.input}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Your message *"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={4}
+                  required
+                  className={styles.textarea}
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className={styles.button}
+                >
+                  {submitting ? "Sending..." : "Send Message"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className={styles.bottom}>
-          <p className={styles.copy}>
-            © 2024 Pixelfreight. All rights reserved.
-          </p>
+          <p className={styles.copy}>© 2024 Pixelfreight. All rights reserved.</p>
           <div className={styles.legal}>
             {legal.map((item) => (
               <a key={item.name} href={item.href} className={styles.linkSmall}>

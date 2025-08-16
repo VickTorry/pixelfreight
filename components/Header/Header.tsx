@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/ButtonWrapper/button";
@@ -18,11 +18,19 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <nav className={styles.nav}>
-        {/* Logo section */}
         <div className={styles.logoContainer}>
           <Image
             src="/logo-header.png"
@@ -33,8 +41,6 @@ export default function Header() {
           />
           <span className={styles.logoText}>Pixelfreight</span>
         </div>
-
-        {/* Desktop nav links */}
         <div className={styles.desktopNav}>
           {navigation.map((item) => (
             <a key={item.name} href={item.href} className={styles.navLink}>
@@ -42,13 +48,9 @@ export default function Header() {
             </a>
           ))}
         </div>
-
-        {/* Desktop actions (theme toggle) */}
         <div className={styles.desktopActions}>
           <ThemeToggle />
         </div>
-
-        {/* Mobile actions: theme toggle + hamburger icon */}
         <div className={styles.mobileActions}>
           <ThemeToggle />
           <Button
@@ -61,7 +63,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile nav dropdown */}
       {mobileMenuOpen && (
         <div className={styles.mobileMenu}>
           <div className={styles.mobileMenuContainer}>

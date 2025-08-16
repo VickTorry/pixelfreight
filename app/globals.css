@@ -1,44 +1,69 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  font-family: var(--font-geist-sans);
+/* ========== THEME TOKENS ========== */
+/* Light (default) */
+:root,
+html[data-theme="light"] {
+  --pf-bg: #faf8f6;
+  --pf-surface: rgba(255, 255, 255, 0.95);
+  --pf-text: #111827;
+  --pf-text-muted: rgba(17, 17, 17, 0.7);
+  --pf-border: rgba(0, 0, 0, 0.1);
+  --pf-accent: #0ea5a5; /* link/underline in light */
+  --pf-cta: #0f2233; /* buttons in light */
+  --pf-cta-fg: #ffffff;
+  --pf-yellow: #f8d361;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark (matches your reference) */
+html[data-theme="dark"] {
+  --pf-bg: #0b1220; /* page background */
+  --pf-surface: rgba(15, 23, 42, 0.9); /* header/panels */
+  --pf-text: #e6e9f0;
+  --pf-text-muted: #aab4c5;
+  --pf-border: rgba(148, 163, 184, 0.18);
+  --pf-accent: #f8d361; /* amber for hovers/underline */
+  --pf-cta: #f8d361; /* buttons in dark */
+  --pf-cta-fg: #0b1220;
 }
 
+/* Map legacy tokens -> new tokens so older CSS keeps working */
+:root,
+html[data-theme="light"],
+html[data-theme="dark"] {
+  --background: var(--pf-bg);
+  --foreground: var(--pf-text);
+}
+
+/* ========== BASE ========== */
 html,
 body {
+  background: var(--pf-bg);
+  color: var(--pf-text);
   max-width: 100vw;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: "Geist Sans", sans-serif;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Resets */
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

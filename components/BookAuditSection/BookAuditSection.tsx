@@ -19,7 +19,7 @@ export function BookAuditSection() {
             size="lg"
             className={styles.button}
             onClick={() =>
-              window.open("https://calendly.com/pixelfreight/30min-audit", "_blank")
+              window.open("https://calendly.com/pixelfreight/hopwebsites-meeting", "_blank")
             }
           >
             Book via Calendly

@@ -1,50 +1,109 @@
+/* BookAuditSection.module.css */
+
+/* Section */
 .section {
-  padding: 5rem 0;
-  background-color: #fefefc; /* light background, matching other sections */
+  padding: clamp(2.5rem, 7vw, 5rem) 0;
+  background: transparent; /* inherit page bg */
 }
 
+/* Container */
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
+/* Centered card */
 .inner {
-  max-width: 768px;
+  max-width: 760px;
   margin: 0 auto;
   text-align: center;
+
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  position: relative;
 }
 
+/* small accent bar on top (teal in light, amber in dark via tokens) */
+.inner::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--pf-accent);
+}
+
+/* Title */
 .title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1.5rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--pf-text);
+  font-size: clamp(1.8rem, 3.6vw, 2.25rem);
+  margin-top: 0.75rem; /* space below accent bar */
+  margin-bottom: 0.75rem;
 }
 
-@media (min-width: 768px) {
-  .title {
-    font-size: 2.25rem;
-  }
-}
-
+/* Subtitle */
 .subtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
-  line-height: 1.75;
-  margin-bottom: 2rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  color: var(--pf-text-muted);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.7;
+  margin: 0 auto 1.5rem;
+  max-width: 60ch;
 }
 
+/* Button — force brand CTA colors via tokens */
 .button {
-  font-size: 1.125rem;
-  padding: 1.25rem 2rem;
-  background-color: #0f172a; /* primary */
-  color: #ffffff;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  background: var(--pf-cta) !important; /* navy (light) / yellow (dark) */
+  color: var(--pf-cta-fg) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 0.95rem 1.25rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18) !important;
+  transition: background 0.2s ease, transform 0.04s ease, box-shadow 0.2s ease !important;
+}
+.button:hover {
+  background: color-mix(in oklab, var(--pf-cta) 86%, #0f2233) !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22) !important;
+}
+.button:active {
+  transform: translateY(1px) !important;
+}
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pf-surface), 0 0 0 4px var(--pf-accent) !important;
 }
 
-.button:hover {
-  background-color: #1e293b; /* hover color */
+/* Small screen tweak */
+@media (max-width: 420px) {
+  .button {
+    width: 100%;
+  }
 }

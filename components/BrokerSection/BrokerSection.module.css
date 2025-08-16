@@ -1,9 +1,12 @@
 /* BrokerSection.module.css */
+
+/* Section */
 .section {
   padding: 5rem 0;
-  background-color: #faf8f6;
+  background: transparent; /* inherit page bg (tokens handle theme) */
 }
 
+/* Container */
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,66 +14,104 @@
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
 }
 
+/* Grid */
 .grid {
   display: grid;
   gap: 3rem;
   align-items: center;
+  grid-template-columns: 1fr;
 }
-
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* Content (left on desktop) */
 .content {
   order: 2;
 }
-
 @media (min-width: 1024px) {
   .content {
     order: 1;
   }
 }
 
+/* Title + copy */
 .title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--pf-text);
+  font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+  margin-bottom: 0.75rem;
 }
 
 .subtitle {
-  font-size: 1.125rem;
-  color: #4b5563;
-  margin-bottom: 2rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  color: var(--pf-text-muted);
+  margin-bottom: 1.75rem;
 }
 
+/* List */
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  gap: 1rem;
 }
-
+.listItem {
+}
 .itemTitle {
-  font-weight: 600;
-  color: #1f2937;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 700;
+  color: var(--pf-text);
   margin-bottom: 0.25rem;
 }
-
 .itemDesc {
-  color: #4b5563;
-  line-height: 1.6;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  color: var(--pf-text-muted);
+  line-height: 1.65;
 }
 
+/* Mockup (right on desktop) */
 .mockupWrap {
   order: 1;
 }
-
 @media (min-width: 1024px) {
   .mockupWrap {
     order: 2;
@@ -78,62 +119,88 @@
 }
 
 .mockupCard {
-  background: white;
-  border: 1px solid #e6f0f2;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
+/* ===== Distinct Broker palette (light vs dark) ===== */
+
+/* Top block — cool blue-gray in light; deep slate in dark */
 .blockPrimary {
-  background-color: #e6f0f2;
   padding: 1rem;
-  border-radius: 0.75rem;
+  border-radius: 12px;
   margin-bottom: 1rem;
+  background: #e6f0f2; /* light */
+}
+html[data-theme="dark"] .blockPrimary {
+  background: #13212b; /* dark cool-slate */
 }
 
 .lineLg {
   height: 1rem;
-  background-color: #cfe5e8;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   margin-bottom: 0.5rem;
+  background: #bfdde1; /* light */
+}
+html[data-theme="dark"] .lineLg {
+  background: #244253; /* dark */
 }
 
 .lineSm {
   height: 0.75rem;
-  background-color: #e6f0f2;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   margin-bottom: 0.4rem;
+  background: #cfe5e8; /* light */
+}
+html[data-theme="dark"] .lineSm {
+  background: #1d3342; /* dark */
 }
 
-.blockList .line {
+/* Middle list block — warm neutral in light; muted slate in dark */
+.blockList {
+  margin-top: 0.5rem;
+}
+.line {
   height: 0.75rem;
-  background-color: #f0ebe3;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   margin-bottom: 0.5rem;
+  background: #f0ebe3; /* light warm beige */
+}
+html[data-theme="dark"] .line {
+  background: #2a3543; /* dark neutral line */
 }
 
+/* CTA block — soft yellow wash (aligns with dark accent) */
 .blockCta {
-  background-color: #fff7d6;
   padding: 0.75rem;
-  border-radius: 0.75rem;
-  margin-top: 1rem;
+  border-radius: 12px;
+  margin-top: 0.9rem;
+  background: #fff7d6; /* light soft yellow */
+}
+html[data-theme="dark"] .blockCta {
+  /* subtle amber tint in dark using your CTA token */
+  background: color-mix(in oklab, var(--pf-cta) 18%, transparent);
 }
 
 .ctaBar {
   height: 2rem;
-  background-color: #ffeeab;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  background: #ffea9a; /* light stronger yellow */
+}
+html[data-theme="dark"] .ctaBar {
+  background: color-mix(in oklab, var(--pf-cta) 42%, var(--pf-surface));
 }
 
+/* widths for lines */
 .w75 {
   width: 75%;
 }
-
 .w85 {
   width: 85%;
 }
-
 .w80 {
   width: 80%;
 }

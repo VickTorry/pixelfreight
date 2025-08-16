@@ -1,63 +1,136 @@
+/* OurServices.module.css */
+
+/* Section ribbon: soft in light, clean in dark */
 .servicesSection {
-  padding: 4rem 1rem;
-  background-color: #f9fafb;
-  overflow-x: auto;
+  padding: clamp(2rem, 6vw, 3rem) 0;
+  background: rgba(240, 245, 255, 0.45);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+html[data-theme="dark"] .servicesSection {
+  background: transparent;
+  border-top: 1px solid var(--pf-border);
+  border-bottom: 1px solid var(--pf-border);
 }
 
+/* Horizontal chain; scrollable on small screens */
 .chevronChain {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
   display: flex;
-  gap: 0;
-  justify-content: center;
+  gap: 16px;
   align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
 }
 
+/* Step card */
 .step {
-  background: white;
   position: relative;
-  width: 220px;
-  padding: 1.5rem;
-  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+  flex: 0 0 240px;
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  scroll-snap-align: start;
+  transition: transform 0.12s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
+/* Hover accent as INSET ring so it shows on all 4 sides */
 .step:hover {
-  transform: translateY(-5px);
-  z-index: 2;
+  transform: translateY(-2px);
+  border-color: var(--pf-border); /* keep neutral border to avoid jump */
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1), inset 0 0 0 2px var(--pf-accent);
 }
 
+/* Connectors between steps (line + tiny arrow) */
+.step:not(.last)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  width: 28px;
+  height: 2px;
+  background: var(--pf-border);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.step:not(.last)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  border-style: solid;
+  border-width: 6px 0 6px 8px;
+  border-color: transparent transparent transparent var(--pf-border);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Match connector color on hover */
+.step:hover:not(.last)::after {
+  background: var(--pf-accent);
+}
+.step:hover:not(.last)::before {
+  border-left-color: var(--pf-accent);
+}
+
+/* Keep left edge clean for first card */
 .first {
-  clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+  margin-left: 0;
 }
 
-.last {
-  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+/* Larger screens: let cards grow */
+@media (min-width: 960px) {
+  .step {
+    flex: 1 1 0;
+    min-width: 220px;
+  }
 }
 
+/* Card content */
 .stepContent {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
+  display: grid;
+  gap: 8px;
+  padding: 18px 16px;
 }
 
 .stepNumber {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1d4ed8;
-  margin-bottom: 0.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+
+  /* accent chip: teal in light, amber in dark */
+  background: color-mix(in oklab, var(--pf-accent) 18%, transparent);
+  color: color-mix(in oklab, var(--pf-accent) 70%, var(--pf-text));
+  border: 1px solid color-mix(in oklab, var(--pf-accent) 55%, var(--pf-border));
 }
 
 .stepTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 0.5rem;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.1px;
+  color: var(--pf-text);
 }
 
 .stepDescription {
-  font-size: 0.95rem;
-  color: #374151;
-  line-height: 1.4;
+  color: var(--pf-text-muted);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+/* Reduce spacing on very small screens */
+@media (max-width: 420px) {
+  .stepContent {
+    padding: 16px 14px;
+  }
+  .stepDescription {
+    font-size: 0.95rem;
+  }
 }

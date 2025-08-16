@@ -1,27 +1,53 @@
-/* --- Header container styles --- */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* ============================
+   Header.module.css (updated)
+   Solid header with dark-to-light logo in dark mode
+   ============================ */
+
+/* Global helpers so content doesn't hide behind fixed header */
+:global(:root) {
+  --hdr-h: 64px; /* header/nav height */
+}
+:global(body) {
+  padding-top: var(--hdr-h);
 }
 
-/* --- Inner nav layout --- */
+/* ---------- Header container ---------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--hdr-h);
+  z-index: 1000;
+
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  transition: box-shadow 0.2s ease;
+}
+
+.scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="dark"] .header {
+  background-color: #0f172a;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Inner nav layout ---------- */
 .nav {
   max-width: 1280px;
   margin: 0 auto;
-  height: 4rem; /* 64px */
+  height: var(--hdr-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
 }
 
-/* --- Logo section --- */
+/* ---------- Logo ---------- */
 .logoContainer {
   display: flex;
   align-items: center;
@@ -32,20 +58,32 @@
   width: 2rem;
   height: 2rem;
   object-fit: contain;
+
+  /* Light mode: show dark logo normally */
+  filter: none;
+  transition: filter 0.3s ease;
+}
+
+/* Dark mode: turn dark logo into light logo (white) */
+:root[data-theme="dark"] .logo {
+  filter: brightness(0) invert(1);
 }
 
 .logoText {
   font-family: "Geist", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--pf-text, #111827);
 }
 
-/* --- Desktop nav links --- */
+:root[data-theme="dark"] .logoText {
+  color: var(--pf-text, #e6e9f0);
+}
+
+/* ---------- Desktop nav links ---------- */
 .desktopNav {
   display: none;
 }
-
 @media (min-width: 768px) {
   .desktopNav {
     display: flex;
@@ -58,20 +96,28 @@
   font-family: "Geist", sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
-  color: rgba(17, 17, 17, 0.8);
+  color: color-mix(in oklab, var(--pf-text, #111827) 86%, transparent);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
+  position: relative;
 }
 
 .navLink:hover {
-  color: #111827;
+  color: var(--pf-text, #111827);
 }
 
-/* --- Desktop actions (theme toggle etc.) --- */
+:root[data-theme="dark"] .navLink {
+  color: rgba(230, 233, 240, 0.9);
+}
+
+:root[data-theme="dark"] .navLink:hover {
+  color: var(--pf-accent, #f8d361);
+}
+
+/* ---------- Desktop actions ---------- */
 .desktopActions {
   display: none;
 }
-
 @media (min-width: 768px) {
   .desktopActions {
     display: flex;
@@ -80,13 +126,12 @@
   }
 }
 
-/* --- Mobile actions (theme toggle + hamburger icon) --- */
+/* ---------- Mobile actions ---------- */
 .mobileActions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
 @media (min-width: 768px) {
   .mobileActions {
     display: none;
@@ -97,19 +142,54 @@
   height: 2.25rem;
   width: 2.25rem;
   padding: 0;
-  background: none;
-  border: none;
+  background: transparent;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--pf-text, #111827);
+  transition: border-color 0.18s ease, transform 0.04s ease,
+    background 0.18s ease;
 }
 
-/* --- Mobile dropdown menu --- */
+.mobileMenuButton:hover {
+  border-color: var(--pf-accent, #0ea5a5);
+}
+
+.mobileMenuButton:active {
+  transform: translateY(1px);
+}
+
+:root[data-theme="dark"] .mobileMenuButton {
+  border-color: rgba(148, 163, 184, 0.22);
+  color: #e6e9f0;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+:root[data-theme="dark"] .mobileMenuButton:hover {
+  border-color: var(--pf-accent, #f8d361);
+}
+
+/* ---------- Mobile dropdown ---------- */
 .mobileMenu {
+  position: fixed;
+  z-index: 999;
+  top: var(--hdr-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+
   background-color: rgba(255, 255, 255, 0.95);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: saturate(160%) blur(8px);
+}
+
+:root[data-theme="dark"] .mobileMenu {
+  background-color: rgba(15, 23, 42, 0.94);
+  border-top-color: rgba(148, 163, 184, 0.18);
 }
 
 .mobileMenuContainer {
@@ -125,11 +205,20 @@
   font-family: "Geist", sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
-  color: rgba(17, 17, 17, 0.8);
+  color: color-mix(in oklab, var(--pf-text, #111827) 86%, transparent);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
+  padding: 0.4rem 0;
 }
 
 .mobileNavLink:hover {
-  color: #111827;
+  color: var(--pf-text, #111827);
+}
+
+:root[data-theme="dark"] .mobileNavLink {
+  color: rgba(230, 233, 240, 0.9);
+}
+
+:root[data-theme="dark"] .mobileNavLink:hover {
+  color: var(--pf-accent, #f8d361);
 }

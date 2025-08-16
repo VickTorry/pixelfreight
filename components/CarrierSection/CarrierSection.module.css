@@ -1,9 +1,12 @@
 /* CarrierSection.module.css */
+
+/* Section */
 .section {
   padding: 5rem 0;
-  background-color: #faf8f6;
+  background: transparent; /* inherits page bg (tokens handle theme) */
 }
 
+/* Container */
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,66 +14,104 @@
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
 }
 
+/* Grid */
 .grid {
   display: grid;
   gap: 3rem;
   align-items: center;
+  grid-template-columns: 1fr;
 }
-
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* Content (left on desktop) */
 .content {
   order: 2;
 }
-
 @media (min-width: 1024px) {
   .content {
     order: 1;
   }
 }
 
+/* Title + copy */
 .title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--pf-text);
+  font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+  margin-bottom: 0.75rem;
 }
 
 .subtitle {
-  font-size: 1.125rem;
-  color: #4b5563;
-  margin-bottom: 2rem;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  color: var(--pf-text-muted);
+  margin-bottom: 1.75rem;
 }
 
+/* List */
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  gap: 1rem;
 }
-
+.listItem {
+}
 .itemTitle {
-  font-weight: 600;
-  color: #1f2937;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 700;
+  color: var(--pf-text);
   margin-bottom: 0.25rem;
 }
-
 .itemDesc {
-  color: #4b5563;
-  line-height: 1.6;
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  color: var(--pf-text-muted);
+  line-height: 1.65;
 }
 
+/* Mockup (right on desktop) */
 .mockupWrap {
   order: 1;
 }
-
 @media (min-width: 1024px) {
   .mockupWrap {
     order: 2;
@@ -78,62 +119,66 @@
 }
 
 .mockupCard {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
+/* Top block with accent tint */
 .blockPrimary {
-  background-color: #e5e7eb;
+  background: color-mix(in oklab, var(--pf-accent) 14%, transparent);
   padding: 1rem;
-  border-radius: 0.75rem;
+  border-radius: 12px;
   margin-bottom: 1rem;
 }
 
+/* Accent lines inside top block */
 .lineLg {
   height: 1rem;
-  background-color: #cbd5e1;
-  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--pf-accent) 40%, var(--pf-surface));
+  border-radius: 8px;
   margin-bottom: 0.5rem;
 }
-
 .lineSm {
   height: 0.75rem;
-  background-color: #e5e7eb;
-  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--pf-accent) 22%, var(--pf-surface));
+  border-radius: 8px;
   margin-bottom: 0.4rem;
 }
 
-.blockList .line {
+/* Middle list block */
+.blockList {
+  margin-top: 0.5rem;
+}
+.line {
   height: 0.75rem;
-  background-color: #d1d5db;
-  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--pf-text) 6%, var(--pf-surface));
+  border-radius: 8px;
   margin-bottom: 0.5rem;
 }
 
+/* CTA block with light accent wash */
 .blockCta {
-  background-color: #d1e5e8;
+  background: color-mix(in oklab, var(--pf-accent) 12%, transparent);
   padding: 0.75rem;
-  border-radius: 0.75rem;
-  margin-top: 1rem;
+  border-radius: 12px;
+  margin-top: 0.9rem;
 }
-
 .ctaBar {
   height: 2rem;
-  background-color: #bcd4d9;
-  border-radius: 0.5rem;
+  background: color-mix(in oklab, var(--pf-accent) 35%, var(--pf-surface));
+  border-radius: 8px;
 }
 
+/* widths for lines */
 .w75 {
   width: 75%;
 }
-
 .w85 {
   width: 85%;
 }
-
 .w80 {
   width: 80%;
 }
