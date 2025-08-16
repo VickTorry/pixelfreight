@@ -68,6 +68,6 @@ a {
   text-decoration: none;
 }
 
-:global(:root) {
+:root {
   --hdr-h: 64px;
 }
