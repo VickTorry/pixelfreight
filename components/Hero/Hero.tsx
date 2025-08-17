@@ -28,7 +28,7 @@ export default function Hero() {
               size="lg"
               className={styles.button}
               onClick={() =>
-                window.open('https://calendly.com/pixelfreight/hopwebsites-meeting', '_blank')
+                window.open('https://calendly.com/pixelfreight/pixelfreight-audit', '_blank')
               }
             >
               Book Free Audit

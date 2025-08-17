@@ -1,21 +1,46 @@
 .toggleButton {
-  height: 2.25rem; /* h-9 */
-  width: 2.25rem; /* w-9 */
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-color: var(--pf-surface, #fff);
+  color: var(--pf-text, #111827);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.08s ease-in-out;
 }
 
+/* Hover (light mode) */
 .toggleButton:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* mimic 'hover:bg-muted' */
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--pf-accent, #0ea5a5); /* blue in light mode */
 }
 
-.icon {
-  width: 1rem; /* h-4 w-4 */
-  height: 1rem;
+/* Icon always rotates a bit when pressed */
+.toggleButton:active {
+  transform: scale(0.95);
+}
+
+/* ---- DARK MODE ---- */
+:root[data-theme="dark"] .toggleButton {
+  background-color: rgba(15, 23, 42, 0.8);
+  color: #f8d361; /* icon always yellow in dark mode */
+  border-color: transparent; /* idle = no border */
+}
+
+:root[data-theme="dark"] .toggleButton:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #f8d361; /* yellow border only on hover */
+}
+
+/* Optional rotation on icon when clicked */
+.toggleButton svg {
+  transition: transform 0.4s ease;
+}
+
+.toggleButton:active svg {
+  transform: rotate(180deg);
 }

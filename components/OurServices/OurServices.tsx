@@ -1,29 +1,44 @@
-import styles from "./OurServices.module.css";
+'use client';
+
+import styles from './OurServices.module.css';
 
 const steps = [
-  { title: "Audit", description: "Free 30-min call to assess what you need." },
-  { title: "Offer", description: "You get a detailed scope with pricing." },
-  { title: "Build", description: "We design and code your site from scratch." },
-  { title: "Launch", description: "Go live in under 30 days, optimized and tested." },
-  { title: "Support", description: "We’re here for updates or changes later." },
+  'Audit',
+  'Offer',
+  'Build',
+  'Launch',
+  'Support',
+];
+
+const descriptions = [
+  'Free 30-min call to assess what you need.',
+  'You get a detailed scope with pricing.',
+  'We design and code your site from scratch.',
+  'Go live in under 30 days, optimized and tested.',
+  'We’re here for updates or changes later.',
 ];
 
 export default function OurServices() {
   return (
     <section className={styles.servicesSection}>
-      <div className={styles.chevronChain}>
-        {steps.map((step, index) => (
-          <div
-            className={`${styles.step} ${index === 0 ? styles.first : ""} ${index === steps.length - 1 ? styles.last : ""}`}
-            key={index}
-          >
-            <div className={styles.stepContent}>
-              <div className={styles.stepNumber}>{index + 1}</div>
-              <div className={styles.stepTitle}>{step.title}</div>
-              <div className={styles.stepDescription}>{step.description}</div>
+      <div className={styles.timelineWrapper}>
+        <div className={styles.timelineTrack}>
+          <div className={styles.flowDot} />
+        </div>
+
+        <div className={styles.stepsRow}>
+          {steps.map((step, index) => (
+            <div key={index} className={styles.stepItem}>
+              <div className={styles.dotWrapper}>
+                <div className={styles.dot} />
+              </div>
+              <div className={styles.label}>
+                <h3>{step}</h3>
+                <p>{descriptions[index]}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
