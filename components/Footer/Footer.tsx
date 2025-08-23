@@ -80,7 +80,7 @@ export function Footer() {
   };
 
   return (
-    <footer className={styles.section}>
+    <footer id="contact" className={styles.section}>
       <div className={styles.container}>
         <Toaster position="top-center" /> {/* toast like the other form */}
 

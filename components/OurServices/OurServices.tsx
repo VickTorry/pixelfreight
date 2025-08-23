@@ -20,7 +20,7 @@ const descriptions = [
 
 export default function OurServices() {
   return (
-    <section className={styles.servicesSection}>
+    <section id="services" className={styles.servicesSection}>
       <div className={styles.timelineWrapper}>
         <div className={styles.timelineTrack}>
           <div className={styles.flowDot} />
