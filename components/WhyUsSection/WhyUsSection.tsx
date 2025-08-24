@@ -55,15 +55,6 @@ export function WhyUsSection() {
               </div>
             ))}
           </div>
-
-          <div className={styles.asSeenOn}>
-            <p className={styles.asSeenLabel}>As listed on:</p>
-            <div className={styles.asSeenLogos}>
-              <div className={styles.logo}>Clutch</div>
-              <div className={styles.logo}>G2</div>
-              <div className={styles.logo}>GoodFirms</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

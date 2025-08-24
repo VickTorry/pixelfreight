@@ -11,6 +11,7 @@ import WhatWeDo from "@/components/WhatWeDo/WhatWeDo";
 import WhyUsSection from "@/components/WhyUsSection/WhyUsSection";
 import BookAuditSection from "@/components/BookAuditSection/BookAuditSection";
 import Footer from "@/components/Footer/Footer";
+import TrustedBy from "@/components/TrustedBy/TrustedBy";
 
 
 
@@ -28,6 +29,7 @@ export default function HomePage() {
       <BrokerSection />
       <WhyUsSection />
       <BookAuditSection />
+      <TrustedBy />
       <Footer />
     </>
   );
