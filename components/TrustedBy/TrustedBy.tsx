@@ -35,7 +35,7 @@ export default function TrustedBy() {
           <div className={styles.badgeWrapper}>
             <Image
               src="/designrush-transparent.png"
-              alt="DesignRush Badge Light"
+              alt="Pixelfreight's rating on Web Design Agency Listing by DesignRush, the industry-leading B2B Marketplace connecting brands with agencies"
               width={120}
               height={160}
               className={`${styles.badge} ${styles.switchableLight}`}
@@ -43,7 +43,7 @@ export default function TrustedBy() {
             />
             <Image
               src="/designrush-transparent.png"
-              alt="DesignRush Badge Dark"
+              alt="Pixelfreight's rating on Web Design Agency Listing by DesignRush, the industry-leading B2B Marketplace connecting brands with agencies"
               width={120}
               height={160}
               className={`${styles.badge} ${styles.switchableDark}`}
