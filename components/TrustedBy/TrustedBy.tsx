@@ -10,11 +10,10 @@ export default function TrustedBy() {
         <h2 className={styles.heading}>Trusted by</h2>
 
         <div className={styles.grid}>
-
           {/* GoodFirms Badge */}
           <div className={styles.badgeWrapper}>
             <a
-              href="https://www.goodfirms.co/directory/cms/top-website-development-companies"
+              href="https://www.goodfirms.co/company/pixelfreight"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.badgeLink}
@@ -31,32 +30,33 @@ export default function TrustedBy() {
               />
             </a>
           </div>
+
           {/* DesignRush Badge */}
           <div className={styles.badgeWrapper}>
-            <Image
-              src="/designrush-transparent.png"
-              alt="Pixelfreight's rating on Web Design Agency Listing by DesignRush, the industry-leading B2B Marketplace connecting brands with agencies"
-              width={120}
-              height={160}
-              className={`${styles.badge} ${styles.switchableLight}`}
-              priority
-            />
-            <Image
-              src="/designrush-transparent.png"
-              alt="Pixelfreight's rating on Web Design Agency Listing by DesignRush, the industry-leading B2B Marketplace connecting brands with agencies"
-              width={120}
-              height={160}
-              className={`${styles.badge} ${styles.switchableDark}`}
-              priority
-            />
+            <a
+              href="https://www.designrush.com/agency/profile/pixelfreight"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.badgeLink}
+            >
+              <Image
+                src="/designrush-transparent.png"
+                alt="Pixelfreight on DesignRush"
+                width={120}
+                height={160}
+                className={styles.badge}
+                priority
+              />
+            </a>
           </div>
+
           {/* Clutch Badge */}
           <div className={styles.badgeWrapper}>
             <iframe
               src="https://clutch.co/share/badges/2541548/14232?utm_source=clutch_top_company_badge&utm_medium=image_embed"
               width="120"
               height="120"
-              className={styles.clutchFrame}
+              className={`${styles.clutchFrame} ${styles.badgeLink}`} // add hover scaling
               title="Top Clutch Consulting Company Odesa 2025"
               loading="lazy"
             ></iframe>
