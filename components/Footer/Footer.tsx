@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";          // NEW
-import { submitToSheet } from "@/lib/submitToSheet";        // NEW
+import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { submitToSheet } from "@/lib/submitToSheet";
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -28,10 +28,24 @@ export function Footer() {
     { name: "Terms of Use", href: "#" },
   ];
 
-  // footer form -> email + message (map to sheet fields)
   const [form, setForm] = useState({ email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+  const scriptId = "designrush-widget";
+  const existingScript = document.getElementById(scriptId);
+  const hasWidgetDiv = document.querySelector("[data-designrush-widget]");
+
+  if (!existingScript && hasWidgetDiv) {
+    const script = document.createElement("script");
+    script.id = scriptId;
+    script.src = "https://www.designrush.com/topbest/js/widgets/agency-reviews.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+}, []);
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,7 +54,6 @@ export function Footer() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // simple validation (mirrors ContactForm style)
     if (!form.email.trim()) {
       toast.error("Please enter your email.");
       return;
@@ -56,21 +69,17 @@ export function Footer() {
 
     setSubmitting(true);
     try {
-      // Map to the same fields your ContactForm uses
-      // (name is optional here; we pass a marker)
-      const payload = {
-        name: "Footer form",              // or leave "" if your sheet allows
+      const ok = await submitToSheet({
+        name: "Footer form",
         email: form.email,
-        comments: form.message,
-        source: "footer",                 // optional: helps you segment
-      };
+        comments: form.message
+      });
 
-      const ok = await submitToSheet(payload);
       if (!ok) throw new Error("Failed to submit");
 
       toast.success("Sent!");
-      setForm({ email: "", message: "" }); // clear fields
-      setSubmitted(true);                   // show inline thank-you
+      setForm({ email: "", message: "" });
+      setSubmitted(true);
     } catch (err) {
       console.error(err);
       toast.error("Submission failed. Please try again.");
@@ -82,9 +91,8 @@ export function Footer() {
   return (
     <footer id="contact" className={styles.section}>
       <div className={styles.container}>
-        <Toaster position="top-center" /> {/* toast like the other form */}
+        <Toaster position="top-center" />
 
-        {/* Top row */}
         <div className={styles.topRow}>
           {/* Brand */}
           <div className={styles.brand}>
@@ -137,13 +145,32 @@ export function Footer() {
                 </a>
               ))}
             </div>
+
+            {/* Review Badge */}
+            <div className={styles.reviewBadge}>
+              <div
+                data-designrush-widget
+                data-agency-id="99674"
+                data-style="light"
+                aria-label="DesignRush agency reviews section"
+              ></div>
+              <noscript>
+                <a
+                  href="https://www.designrush.com/agency/profile/pixelfreight#reviews"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Pixelfreight reviews on DesignRush"
+                  className={styles.linkSmall}
+                >
+                  REVIEW US ON DESIGNRUSH
+                </a>
+              </noscript>
+            </div>
           </div>
 
-          {/* Form (lower-right) */}
+          {/* Form */}
           <div className={styles.formWrap}>
             <h4 className={styles.heading}>Get in touch</h4>
-
-            {/* Show thank-you inline after success */}
             {submitted ? (
               <div className={styles.thankYou}>
                 <p>Thank you! We&apos;ll be in touch soon.</p>
@@ -186,7 +213,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className={styles.bottom}>
           <p className={styles.copy}>© 2024 Pixelfreight. All rights reserved.</p>
           <div className={styles.legal}>

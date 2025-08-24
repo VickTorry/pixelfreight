@@ -148,6 +148,12 @@ html[data-theme="dark"] .section .link::after {
   margin-top: 0.5rem;
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 /* On yellow footer, make icons navy */
 html[data-theme="dark"] .section .icon {
   color: #0f2233;
@@ -350,3 +356,22 @@ html[data-theme="dark"] .section .thankYou {
 /* Optional subtle press effect is already present:
    .button:active { transform: translateY(1px); }
 */
+
+/* --------- Review Badge Styling --------- */
+.reviewBadge {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.reviewBadge > div {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .reviewBadge {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+}
