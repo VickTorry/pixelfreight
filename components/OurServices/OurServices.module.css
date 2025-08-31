@@ -1,129 +1,125 @@
+/* components/OurServices/OurServices.module.css */
+/* Truck above headings; whole step is hover target; no rails/circles/numbers */
+
 .servicesSection {
   padding: clamp(3rem, 6vw, 4rem) 0;
-  background: #f7faff;
+  background: #faf8f6;
   position: relative;
 }
-
 html[data-theme="dark"] .servicesSection {
   background: #0b111f;
 }
 
+/* Reserve vertical space for the truck here */
 .timelineWrapper {
   position: relative;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  /* tune once and forget */
+  --truck-size: 32px; /* icon size */
+  --truck-clearance: 28px; /* gap under the truck */
+  padding-top: calc(var(--truck-size) + var(--truck-clearance));
 }
 
-.timelineTrack {
+/* Truck sits at the very top of the wrapper */
+.truck {
   position: absolute;
-  top: 36px;
+  top: 0;
   left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--pf-border, #ccc);
-  z-index: 0;
-  overflow: hidden;
+  transform: translateX(0) translateX(-50%);
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  opacity: 0; /* fades in after first measure */
+  z-index: 2;
+  pointer-events: none;
+}
+.truckIcon {
+  width: var(--truck-size);
+  height: var(--truck-size);
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+  color: #0f2233;
+}
+html[data-theme="dark"] .truckIcon {
+  color: #f8fafc;
+}
+.faceRight {
+  transform: scaleX(1);
+}
+.faceLeft {
+  transform: scaleX(-1);
 }
 
-.flowDot {
-  width: 18px;
-  height: 18px;
-  background: var(--pf-accent, #0ea5a5);
-  border-radius: 999px;
-  position: absolute;
-  top: -7px;
-  left: 0;
-  animation: moveDot 6s infinite ease-in-out;
-}
-
-@keyframes moveDot {
-  0% {
-    left: 0%;
-  }
-  50% {
-    left: 50%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
+/* Steps row now has **no extra top margin**; the wrapper’s padding-top
+   guarantees the headings never collide with the truck */
 .stepsRow {
   display: flex;
   justify-content: space-between;
+  gap: clamp(0.75rem, 1.2vw, 1rem);
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  padding: 0;
+  list-style: none;
 }
-
 .stepItem {
   flex: 1;
   text-align: center;
   position: relative;
+  min-width: 0;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
+  cursor: default;
 }
-
-.dotWrapper {
-  width: 18px;
-  height: 18px;
-  background: var(--pf-surface, #fff);
-  border: 3px solid var(--pf-accent);
-  border-radius: 999px;
-  margin: 0 auto 0.5rem;
-  position: relative;
-  z-index: 3;
+.stepItem:hover,
+.stepItem:focus-visible {
+  background: rgba(14, 165, 165, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
-
-.dotWrapper::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  height: 2px;
-  width: 100%;
-  background: var(--pf-accent);
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.stepItem:last-child .dotWrapper::after {
-  display: none;
-}
-
-.label h3 {
-  font-weight: 700;
+.title {
+  margin: 0 0 0.25rem 0;
+  font-weight: 800;
   font-size: 1rem;
-  color: var(--pf-text);
-  margin-bottom: 0.25rem;
+  color: var(--pf-text, #0f2233);
 }
-
-.label p {
-  font-size: 0.95rem;
-  color: var(--pf-text-muted);
-  line-height: 1.5;
-  max-width: 160px;
+.text {
   margin: 0 auto;
+  max-width: 240px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--pf-text-muted, rgba(15, 34, 51, 0.75));
+}
+html[data-theme="dark"] .title {
+  color: #f8fafc;
+}
+html[data-theme="dark"] .text {
+  color: rgba(248, 250, 252, 0.82);
+}
+html[data-theme="dark"] .stepItem:hover,
+html[data-theme="dark"] .stepItem:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
 }
 
-/* Responsive */
+/* Mobile: hide truck (optional) and present clean vertical list */
 @media (max-width: 768px) {
   .stepsRow {
     flex-direction: column;
-    gap: 2rem;
+    align-items: flex-start;
+    gap: 1.25rem;
   }
-
-  .timelineTrack {
+  .truck {
     display: none;
   }
-
-  .flowDot {
-    display: none;
-  }
-
-  .dotWrapper::after {
-    display: none;
-  }
-
   .stepItem {
     text-align: left;
+    padding: 0.4rem 0;
+  }
+  .text {
+    margin-left: 0;
+    max-width: 36ch;
   }
 }
