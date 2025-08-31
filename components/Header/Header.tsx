@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/ButtonWrapper/button";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
@@ -31,16 +32,22 @@ export default function Header() {
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <nav className={styles.nav}>
-        <div className={styles.logoContainer}>
-          <Image
-            src="/logo-header.png"
-            alt="Pixelfreight"
-            width={32}
-            height={32}
-            className={styles.logo}
-          />
-          <span className={styles.logoText}>Pixelfreight</span>
-        </div>
+        <Link
+           href="/"
+           className={styles.logoContainer}
+           aria-label="Go to Pixelfreight home"
+           title="Home"
+        >
+         <Image
+           src="/logo-header.png"
+           alt="Pixelfreight"
+           width={32}
+           height={32}
+           className={styles.logo}
+           priority
+         />
+         <span className={styles.logoText}>Pixelfreight</span>
+       </Link>
         <div className={styles.desktopNav}>
           {navigation.map((item) => (
             <a key={item.name} href={item.href} className={styles.navLink}>

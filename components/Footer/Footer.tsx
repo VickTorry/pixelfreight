@@ -17,11 +17,25 @@ export function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
-  const social = [
-    { name: "LinkedIn", href: "#" },
-    { name: "Facebook", href: "#" },
-    { name: "Clutch", href: "#" },
-  ];
+  // socials.ts (or inline)
+type Social = {
+  name: string;
+  href: string;
+  target?: React.HTMLAttributeAnchorTarget;
+  rel?: string;
+};
+
+ const social: Social[] = [
+  { name: "LinkedIn", href: "#" },
+  { name: "Facebook", href: "#" },
+  {
+    name: "Clutch",
+    href: "https://clutch.co/profile/pixelfreight?utm_source=clutch_top_company_badge&utm_medium=image_embed&badge=14232",
+    target: "_blank",
+    rel: "noopener noreferrer", // important
+  },
+];
+
 
   const legal = [
     { name: "Privacy Policy", href: "#" },
@@ -140,9 +154,15 @@ export function Footer() {
             </div>
             <div className={styles.socials}>
               {social.map((s) => (
-                <a key={s.name} href={s.href} className={styles.link}>
-                  {s.name}
-                </a>
+              <a
+               key={s.name}
+               href={s.href}
+               className={styles.link}
+              target={s.target || undefined}
+              rel={s.target === "_blank" ? "noopener noreferrer" : undefined}
+              >
+             {s.name}
+              </a>
               ))}
             </div>
 
