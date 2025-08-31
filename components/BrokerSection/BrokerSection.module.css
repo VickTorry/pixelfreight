@@ -1,27 +1,26 @@
-/* BrokerSection.module.css */
+/* components/BrokerSection/BrokerSection.module.css */
+/* Dark band section. Inherits global font. Consistent spacing/colors with site. */
 
-/* Section */
+/* ---------- Section ---------- */
 .section {
-  padding: 5rem 0;
-  background: transparent; /* inherit page bg (tokens handle theme) */
+  background: #0f2233; /* site navy band */
+  color: #ffffff;
+  padding: clamp(3rem, 6vw, 5rem) 0;
 }
 
-/* Container */
+/* ---------- Container ---------- */
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-.inner {
-}
-
-/* Grid */
+/* ---------- Grid ---------- */
 .grid {
   display: grid;
   gap: 3rem;
-  align-items: center;
   grid-template-columns: 1fr;
+  align-items: center;
 }
 @media (min-width: 1024px) {
   .grid {
@@ -29,178 +28,110 @@
   }
 }
 
-/* Content (left on desktop) */
-.content {
-  order: 2;
-}
-@media (min-width: 1024px) {
-  .content {
-    order: 1;
-  }
-}
-
-/* Title + copy */
-.title {
-  font-family: var(
-    --font-geist-sans,
-    "Geist Sans",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif
-  );
-  font-weight: 800;
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-  color: var(--pf-text);
-  font-size: clamp(1.9rem, 3.5vw, 2.5rem);
-  margin-bottom: 0.75rem;
-}
-
-.subtitle {
-  font-family: var(
-    --font-geist-sans,
-    "Geist Sans",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif
-  );
-  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
-  color: var(--pf-text-muted);
-  margin-bottom: 1.75rem;
-}
-
-/* List */
-.list {
-  display: grid;
-  gap: 1rem;
-}
-.listItem {
-}
-.itemTitle {
-  font-family: var(
-    --font-geist-sans,
-    "Geist Sans",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif
-  );
-  font-weight: 700;
-  color: var(--pf-text);
-  margin-bottom: 0.25rem;
-}
-.itemDesc {
-  font-family: var(
-    --font-geist-sans,
-    "Geist Sans",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif
-  );
-  color: var(--pf-text-muted);
-  line-height: 1.65;
-}
-
-/* Mockup (right on desktop) */
-.mockupWrap {
+/* keep content left, image right on desktop */
+.left {
   order: 1;
 }
-@media (min-width: 1024px) {
-  .mockupWrap {
-    order: 2;
-  }
+.right {
+  order: 2;
 }
 
-.mockupCard {
-  background: var(--pf-surface);
-  border: 1px solid var(--pf-border);
-  border-radius: 16px;
-  padding: 1.25rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+/* ---------- Heading & list ---------- */
+.heading {
+  font-weight: 800;
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.5rem);
+  color: #ffffff;
+  margin: 0 0 1.25rem 0;
 }
 
-/* ===== Distinct Broker palette (light vs dark) ===== */
+.items {
+  display: grid;
+  gap: 1.1rem;
+}
 
-/* Top block — cool blue-gray in light; deep slate in dark */
-.blockPrimary {
-  padding: 1rem;
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.iconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12); /* subtle glass on dark */
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.itemTitle {
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.15rem 0;
+  font-size: 1.05rem;
+}
+
+.itemDesc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ---------- CTA ---------- */
+.ctaButton {
+  margin-top: 1.25rem;
+  background: #ffffff;
+  color: #0f2233;
+  border: none;
   border-radius: 12px;
-  margin-bottom: 1rem;
-  background: #e6f0f2; /* light */
+  padding: 0.9rem 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s, transform 0.04s, box-shadow 0.2s;
 }
-html[data-theme="dark"] .blockPrimary {
-  background: #13212b; /* dark cool-slate */
+.ctaButton:hover {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
 }
-
-.lineLg {
-  height: 1rem;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  background: #bfdde1; /* light */
+.ctaButton:active {
+  transform: translateY(1px);
 }
-html[data-theme="dark"] .lineLg {
-  background: #244253; /* dark */
-}
-
-.lineSm {
-  height: 0.75rem;
-  border-radius: 8px;
-  margin-bottom: 0.4rem;
-  background: #cfe5e8; /* light */
-}
-html[data-theme="dark"] .lineSm {
-  background: #1d3342; /* dark */
+.ctaButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px currentColor, 0 0 0 4px #f8d361; /* yellow focus ring */
 }
 
-/* Middle list block — warm neutral in light; muted slate in dark */
-.blockList {
-  margin-top: 0.5rem;
-}
-.line {
-  height: 0.75rem;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  background: #f0ebe3; /* light warm beige */
-}
-html[data-theme="dark"] .line {
-  background: #2a3543; /* dark neutral line */
+/* ---------- Screenshot block ---------- */
+.screenshotWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9; /* gives <Image fill/> a box */
+  min-height: 280px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0c1a27; /* dark fallback */
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
 }
 
-/* CTA block — soft yellow wash (aligns with dark accent) */
-.blockCta {
-  padding: 0.75rem;
-  border-radius: 12px;
-  margin-top: 0.9rem;
-  background: #fff7d6; /* light soft yellow */
-}
-html[data-theme="dark"] .blockCta {
-  /* subtle amber tint in dark using your CTA token */
-  background: color-mix(in oklab, var(--pf-cta) 18%, transparent);
+.screenshotImg {
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: blur(1px) brightness(0.98); /* anonymized but visible */
 }
 
-.ctaBar {
-  height: 2rem;
-  border-radius: 8px;
-  background: #ffea9a; /* light stronger yellow */
-}
-html[data-theme="dark"] .ctaBar {
-  background: color-mix(in oklab, var(--pf-cta) 42%, var(--pf-surface));
-}
-
-/* widths for lines */
-.w75 {
-  width: 75%;
-}
-.w85 {
-  width: 85%;
-}
-.w80 {
-  width: 80%;
+.screenshotOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1); /* light film on dark bg */
+  pointer-events: none;
 }
