@@ -217,263 +217,115 @@
   color: var(--pf-accent, #f8d361);
 }
 
-/* ===================== CONSULTING DROPDOWN (FULL REWRITE) ===================== */
+/* ===================== Consulting as a plain nav link ===================== */
 
-/* Anchor + hover-gap bridge */
+/* keep dropdown alive when moving cursor from trigger to panel */
 .consulting {
   position: relative;
-  --menu-gap: 10px; /* visual offset between trigger and panel */
+  --menu-gap: 10px;
 }
-/* Keep :hover alive while cursor crosses the gap */
 .consulting::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -8px;
+  right: -8px;
   top: 100%;
   height: var(--menu-gap);
 }
 
-/* ---------- Trigger: secondary CTA (outline by default) ---------- */
+/* Trigger = same look as .navLink; let .navLink control colors */
 .consultingTrigger {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0; /* match nav rhythm */
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 12px; /* same rhythm as other nav items */
-  border-radius: 10px; /* rounded rectangle, not a pill */
-  border: 1px solid var(--cm-accent, var(--pf-accent, #0ea5a5));
-  color: var(--cm-accent, var(--pf-accent, #0ea5a5));
-  background: transparent;
-  font-weight: 600;
   line-height: 1;
-  text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
-    transform 0.06s ease;
+
+  /* accent underline on interaction */
+  text-decoration-line: none;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
 }
 
-/* One pattern; only accent hue changes via your tokens in dark */
-:root[data-theme="dark"] .consultingTrigger {
-  border-color: var(--cm-accent, var(--pf-accent, #f8d361));
-  color: var(--cm-accent, var(--pf-accent, #f8d361));
-}
-
-/* Hover + Open affordance (tinted fill, clearer border) */
-.consulting:hover .consultingTrigger,
-.consulting:focus-within .consultingTrigger {
-  background: color-mix(
-    in oklab,
-    var(--cm-accent, var(--pf-accent, #0ea5a5)) 14%,
-    #ffffff
-  );
-  border-color: color-mix(
-    in oklab,
-    var(--cm-accent, var(--pf-accent, #0ea5a5)) 50%,
-    #ffffff
-  );
-  color: #0b1220; /* readable on both teal- and yellow-tinted fills */
-}
-
-.consultingTrigger:hover {
-  transform: translateY(-1px);
-}
-.consultingTrigger:active {
-  transform: translateY(0);
-}
+/* Only add the accent underline; do NOT override color (so it matches .navLink) */
+.consultingTrigger:hover,
 .consultingTrigger:focus-visible {
-  outline: 2px solid var(--cm-accent, var(--pf-accent, #0ea5a5));
-  outline-offset: 2px;
+  text-decoration-line: underline;
+  text-decoration-color: var(
+    --pf-accent,
+    #0ea5a5
+  ); /* teal in light, amber in dark */
 }
 
-/* Chevron rotation for open state */
+/* Chevron: rotate + use accent when open/hovered */
 .chevron {
   width: 14px;
   height: 14px;
-  opacity: 0.9;
-  vertical-align: -2px;
-  transition: transform 150ms ease;
+  opacity: 0.8;
+  transition: transform 150ms ease, color 150ms ease;
 }
 .consulting:hover .chevron,
 .consulting:focus-within .chevron {
   transform: rotate(180deg);
+  color: var(--pf-accent, #0ea5a5);
 }
 
-/* ---------- Panel: fully opaque (no hero bleed) + animation ---------- */
+/* ---------- Panel: fully opaque + animated ---------- */
 .dropdown {
   position: absolute;
-  left: 0;
   top: calc(100% + var(--menu-gap));
-  min-width: 320px;
+  left: 0;
+  min-width: 280px;
   padding: 8px;
   border-radius: 12px;
   z-index: 300;
 
-  background: #ffffff; /* opaque light */
+  background: #fff; /* no bleed-through */
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
 
-  /* animate open/close (use visibility instead of display) */
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px) scale(0.98);
+  transform: translateY(8px);
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease,
     visibility 0s linear 0.18s;
 }
-
 :root[data-theme="dark"] .dropdown {
-  background: #0f172a; /* opaque dark */
+  background: #0f172a;
   border-color: rgba(148, 163, 184, 0.22);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
 }
 
-/* Show panel on hover/focus within parent */
 .consulting:hover .dropdown,
 .consulting:focus-within .dropdown {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   pointer-events: auto;
   transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-/* ---------- Items: accent-tinted row + left bar, a11y-friendly ---------- */
+/* Dropdown items */
 .dropdownLink {
-  position: relative; /* for left accent bar */
   display: block;
-  padding: 12px 12px 12px 20px; /* space for the bar */
-  min-height: 44px; /* touch target */
+  padding: 12px 12px;
   border-radius: 8px;
-  font-size: 14px;
-  color: var(--pf-text, #111827);
-  text-decoration: none;
-  outline: none;
-  transition: background 0.15s ease, color 0.15s ease, filter 0.06s ease;
-}
-
-/* Left accent bar (hover/focus/current) */
-.dropdownLink::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  bottom: 8px;
-  width: 3px;
-  border-radius: 2px;
-  background: var(--cm-accent, var(--pf-accent, #0ea5a5));
-  opacity: 0;
-  transform: scaleY(0.6);
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-/* Hover + keyboard focus-visible */
-@media (hover: hover) {
-  .dropdownLink:hover,
-  .dropdownLink:focus-visible {
-    background: color-mix(
-      in oklab,
-      var(--cm-accent, var(--pf-accent, #0ea5a5)) 14%,
-      #ffffff
-    );
-    color: #0b1220;
-  }
-  :root[data-theme="dark"] .dropdownLink:hover,
-  :root[data-theme="dark"] .dropdownLink:focus-visible {
-    background: color-mix(
-      in oklab,
-      var(--cm-accent, var(--pf-accent, #f8d361)) 18%,
-      #0f172a
-    );
-    color: #0b1220; /* near-black on yellow tint */
-  }
-  .dropdownLink:hover::before,
-  .dropdownLink:focus-visible::before {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-}
-
-/* Active/press feedback */
-.dropdownLink:active {
-  filter: brightness(0.96);
-}
-
-/* Current page (optional: set aria-current="page" or .is-current in markup) */
-.dropdownLink[aria-current="page"],
-.dropdownLink.is-current {
-  background: color-mix(
-    in oklab,
-    var(--cm-accent, var(--pf-accent, #0ea5a5)) 18%,
-    #ffffff
-  );
-  color: #0b1220;
-}
-:root[data-theme="dark"] .dropdownLink[aria-current="page"],
-:root[data-theme="dark"] .dropdownLink.is-current {
-  background: color-mix(
-    in oklab,
-    var(--cm-accent, var(--pf-accent, #f8d361)) 22%,
-    #0f172a
-  );
-  color: #0b1220;
-}
-.dropdownLink[aria-current="page"]::before,
-.dropdownLink.is-current::before {
-  opacity: 1;
-  transform: scaleY(1);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .dropdown,
-  .dropdownLink,
-  .dropdownLink::before {
-    transition: none;
-  }
-}
-
-/* ---------- Mobile submenu (kept simple & readable) ---------- */
-.mobileSubmenu {
-  margin: 6px 0 0 8px;
-  border-left: 1px solid var(--pf-border, rgba(0, 0, 0, 0.1));
-  padding-left: 10px;
-}
-.mobileSubLink {
-  display: block;
-  padding: 10px 0;
   min-height: 44px;
-  font-size: 14px;
   color: var(--pf-text, #111827);
   text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-:root[data-theme="dark"] .mobileSubLink {
-  color: #e6e9f0;
+.dropdownLink:hover,
+.dropdownLink:focus-visible {
+  background: rgba(14, 165, 165, 0.12);
+  color: #0b1220;
 }
-
-/* ===================== DARK THEME CONTRAST FIXES ===================== */
-
-/* 1) Trigger (Consulting) — force readable text on the light-yellow hover/open */
-:root[data-theme="dark"] .consulting:hover .consultingTrigger,
-:root[data-theme="dark"] .consulting:focus-within .consultingTrigger {
-  /* keep the light tint so it reads as "open", but make text near-black */
-  background: color-mix(in oklab, var(--pf-accent, #f8d361) 22%, #ffffff);
-  border-color: color-mix(in oklab, var(--pf-accent, #f8d361) 55%, #ffffff);
-  color: #0b1220; /* strong contrast on light tint */
-}
-
-/* 2) Menu items — when hovered/focused/current in dark mode, keep text LIGHT,
-      and use an amber-tinted overlay that still reads against the dark panel */
 :root[data-theme="dark"] .dropdownLink:hover,
 :root[data-theme="dark"] .dropdownLink:focus-visible {
-  background: rgba(248, 211, 97, 0.18); /* amber tint over dark panel */
-  color: #ffffff; /* stay light for contrast */
-}
-:root[data-theme="dark"] .dropdownLink[aria-current="page"],
-:root[data-theme="dark"] .dropdownLink.is-current {
-  background: rgba(248, 211, 97, 0.22);
-  color: #ffffff; /* persist legibility */
-}
-
-/* Optional: if the left bar looks too faint on some displays, bump its alpha */
-:root[data-theme="dark"] .dropdownLink::before {
-  background: color-mix(in oklab, var(--pf-accent, #f8d361) 100%, transparent);
+  background: rgba(248, 211, 97, 0.18);
+  color: #ffffff;
 }
