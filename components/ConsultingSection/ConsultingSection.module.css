@@ -1,0 +1,238 @@
+/* consulting.module.css
+   Works with your global tokens from :root/html[data-theme].
+   No invalid selector/media chaining. CSS-modules friendly.
+*/
+
+/* ---------- WRAPPER ---------- */
+.wrapper {
+  background: var(--pf-bg);
+  color: var(--pf-text);
+}
+
+/* ---------- HERO (light by default) ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  padding: clamp(64px, 8vw, 96px) 16px;
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-light.jpg") center/cover no-repeat,
+    linear-gradient(135deg, #172b4d 0%, #0f1b2f 100%);
+  overflow: hidden;
+}
+
+/* Dark via explicit theme class */
+:global(html[data-theme="dark"]) .hero {
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(0, 0, 0, 0.28),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-dark.jpg") center/cover no-repeat,
+    linear-gradient(180deg, #0b1220 0%, #0a1524 100%);
+}
+
+/* Dark via system preference only when no explicit theme is set */
+@media (prefers-color-scheme: dark) {
+  :global(html):not([data-theme]) .hero {
+    background: radial-gradient(
+        1200px 600px at 80% 20%,
+        rgba(0, 0, 0, 0.28),
+        transparent 60%
+      ),
+      url("/pixelfreight-hero-dark.jpg") center/cover no-repeat,
+      linear-gradient(180deg, #0b1220 0%, #0a1524 100%);
+  }
+}
+
+.heroContent {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  padding: 80px 16px;
+  background: var(--pf-bg);
+}
+
+.sectionMuted {
+  padding: 80px 16px;
+  background: color-mix(in oklab, var(--pf-bg) 85%, #ffffff);
+}
+:global(html[data-theme="dark"]) .sectionMuted {
+  background: color-mix(in oklab, var(--pf-bg) 80%, #0f1b2f);
+}
+@media (prefers-color-scheme: dark) {
+  :global(html):not([data-theme]) .sectionMuted {
+    background: color-mix(in oklab, var(--pf-bg) 80%, #0f1b2f);
+  }
+}
+
+.sectionInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-weight: 800;
+  color: var(--pf-text);
+  font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+  margin-bottom: 40px;
+}
+
+/* ---------- GRID / CARDS ---------- */
+.grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: var(--pf-surface);
+  color: var(--pf-text);
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: transform 220ms ease, box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-color: color-mix(in oklab, var(--pf-border) 30%, var(--pf-accent));
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--pf-cta);
+  color: var(--pf-cta-fg);
+  margin: 0 auto 12px;
+}
+.iconSvg {
+  width: 20px;
+  height: 20px;
+}
+
+.cardTitle {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.02rem;
+  margin: 8px 0 6px;
+}
+.cardDesc {
+  text-align: center;
+  color: var(--pf-text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+}
+.cardCta {
+  text-align: center;
+}
+
+/* ---------- FAQ ---------- */
+.faqList {
+  display: grid;
+  gap: 16px;
+}
+
+.faqCard {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 22px;
+}
+.faqQ {
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--pf-text);
+}
+.faqA {
+  color: var(--pf-text-muted);
+  line-height: 1.65;
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  background: var(--pf-cta);
+  color: var(--pf-cta-fg);
+  padding: 80px 16px;
+}
+.ctaInner {
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ctaTitle {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.2vw, 2.25rem);
+  margin-bottom: 12px;
+}
+.ctaText {
+  opacity: 0.95;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* Make links styled as buttons adopt CTA contrast when needed */
+.ctaButton {
+  /* your ButtonLink/Button will pass this class */
+  background: var(--pf-cta-fg) !important;
+  color: var(--pf-cta) !important;
+  border: 1px solid transparent;
+}
+.ctaButton:hover {
+  filter: brightness(0.97);
+}
+
+/* ---------- UTILITIES (optional) ---------- */
+.visuallyHidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

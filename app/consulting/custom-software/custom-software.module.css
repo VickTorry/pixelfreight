@@ -1,0 +1,383 @@
+/* Uses your global tokens: --pf-bg, --pf-surface, --pf-text, --pf-text-muted, --pf-border, --pf-cta, --pf-cta-fg */
+
+.wrapper {
+  background: var(--pf-bg);
+  color: var(--pf-text);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 420px;
+  padding: clamp(64px, 8vw, 96px) 16px;
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-light.jpg") center/cover no-repeat,
+    linear-gradient(135deg, #172b4d 0%, #0f1b2f 100%);
+  overflow: hidden;
+}
+:global(html[data-theme="dark"]) .hero {
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(0, 0, 0, 0.28),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-dark.jpg") center/cover no-repeat,
+    linear-gradient(180deg, #0b1220 0%, #0a1524 100%);
+}
+.heroDecor {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.heroIconA {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 128px;
+  height: 128px;
+}
+.heroIconB {
+  position: absolute;
+  top: 50%;
+  right: 33%;
+  width: 64px;
+  height: 64px;
+  transform: rotate(-45deg);
+}
+.heroBox {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+  width: 96px;
+  height: 96px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg);
+}
+
+.heroContent {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.heroTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  color: #fff;
+  margin: 0 0 16px;
+}
+.heroSubtitle {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 880px;
+  margin: 0 auto 16px;
+}
+
+.noteBox {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 80px 16px;
+  background: var(--pf-bg);
+}
+.sectionMuted {
+  padding: 80px 16px;
+  background: color-mix(in oklab, var(--pf-bg) 85%, #ffffff);
+}
+:global(html[data-theme="dark"]) .sectionMuted {
+  background: color-mix(in oklab, var(--pf-bg) 80%, #0f1b2f);
+}
+.sectionInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sectionTitle {
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+  margin-bottom: 40px;
+}
+
+/* Two-column layout */
+.columns {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 1024px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Pains */
+.painsList {
+  list-style: none;
+  display: grid;
+  gap: 24px;
+}
+.painItem {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+}
+.painIcon {
+  width: 24px;
+  height: 24px;
+  color: #ef4444;
+  margin-top: 3px;
+}
+.painTitle {
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.painText {
+  color: var(--pf-text-muted);
+}
+
+/* Roadmap panel */
+.pipelinePanel {
+  border-radius: 14px;
+  padding: 24px;
+  background: color-mix(in oklab, var(--pf-bg) 90%, #ffffff);
+  border: 1px solid var(--pf-border);
+}
+:global(html[data-theme="dark"]) .pipelinePanel {
+  background: color-mix(in oklab, var(--pf-bg) 88%, #0f1b2f);
+}
+.pipelineTitle {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.pipelineList {
+  display: grid;
+  gap: 14px;
+}
+.pipelineItem {
+  display: grid;
+  grid-template-columns: 48px 1fr 20px;
+  gap: 12px;
+  align-items: center;
+}
+.stepCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: #172b4d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.stepCard {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.stepLabel {
+  font-weight: 600;
+}
+.stepFlow {
+  font-size: 12px;
+  color: var(--pf-text-muted);
+  margin-top: 4px;
+}
+.flowArrow {
+  width: 16px;
+  height: 16px;
+  color: var(--pf-text-muted);
+}
+
+/* Solutions grid */
+.gridCards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .gridCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .gridCards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.card {
+  background: var(--pf-surface);
+  color: var(--pf-text);
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+.cardIcon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  border-radius: 10px;
+  background: #172b4d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconSvg {
+  width: 20px;
+  height: 20px;
+}
+.cardTitle {
+  font-weight: 700;
+  margin: 8px 0 6px;
+}
+.cardDesc {
+  color: var(--pf-text-muted);
+  line-height: 1.6;
+}
+
+/* Blueprint visual (Before/After) */
+.exampleWrap {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.exampleGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .exampleGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.exampleCol {
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid;
+}
+.exampleTitle {
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.exampleList {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.exampleList li {
+  margin: 6px 0;
+  line-height: 1.65;
+}
+
+/* red (before) */
+.colRed {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+/* green (after) */
+.colGreen {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+/* Impact */
+.impactWrap {
+  text-align: center;
+}
+.impactGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .impactGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.impactCard {
+  background: var(--pf-bg);
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 24px;
+}
+.impactValue {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #172b4d;
+  margin-bottom: 6px;
+}
+.impactLabel {
+  opacity: 0.85;
+}
+.impactNote {
+  opacity: 0.85;
+  line-height: 1.65;
+  margin-top: 16px;
+}
+
+/* CTA (blue) */
+.ctaBlue {
+  background: #172b4d;
+  color: #fff;
+  padding: 80px 16px;
+}
+.ctaInner {
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ctaTitle {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.2vw, 2.25rem);
+  margin-bottom: 12px;
+}
+.ctaText {
+  opacity: 0.9;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.ctaButtonInvert {
+  background: #fff !important;
+  color: #172b4d !important;
+  border: 1px solid transparent;
+}
+.ctaButtonInvert:hover {
+  filter: brightness(0.97);
+}
+.iconRight {
+  width: 20px;
+  height: 20px;
+  margin-left: 0.5rem;
+  vertical-align: -3px;
+}

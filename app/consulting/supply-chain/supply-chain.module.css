@@ -1,0 +1,312 @@
+/* Uses your global tokens from :root/html[data-theme] */
+
+/* ----- Page wrapper ----- */
+.wrapper {
+  background: var(--pf-bg);
+  color: var(--pf-text);
+}
+
+/* ----- HERO ----- */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  padding: clamp(64px, 8vw, 96px) 16px;
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-light.jpg") center/cover no-repeat,
+    linear-gradient(135deg, #172b4d 0%, #0f1b2f 100%);
+  overflow: hidden;
+}
+:global(html[data-theme="dark"]) .hero {
+  background: radial-gradient(
+      1200px 600px at 80% 20%,
+      rgba(0, 0, 0, 0.28),
+      transparent 60%
+    ),
+    url("/pixelfreight-hero-dark.jpg") center/cover no-repeat,
+    linear-gradient(180deg, #0b1220 0%, #0a1524 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :global(html):not([data-theme]) .hero {
+    background: radial-gradient(
+        1200px 600px at 80% 20%,
+        rgba(0, 0, 0, 0.28),
+        transparent 60%
+      ),
+      url("/pixelfreight-hero-dark.jpg") center/cover no-repeat,
+      linear-gradient(180deg, #0b1220 0%, #0a1524 100%);
+  }
+}
+.heroContent {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+.heroTitle {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  color: #fff;
+  margin: 0 0 16px;
+}
+.heroSubtitle {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* ----- Sections ----- */
+.section {
+  padding: 80px 16px;
+  background: var(--pf-bg);
+}
+.sectionMuted {
+  padding: 80px 16px;
+  background: color-mix(in oklab, var(--pf-bg) 85%, #ffffff);
+}
+:global(html[data-theme="dark"]) .sectionMuted {
+  background: color-mix(in oklab, var(--pf-bg) 80%, #0f1b2f);
+}
+@media (prefers-color-scheme: dark) {
+  :global(html):not([data-theme]) .sectionMuted {
+    background: color-mix(in oklab, var(--pf-bg) 80%, #0f1b2f);
+  }
+}
+.sectionInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sectionTitle {
+  text-align: center;
+  font-weight: 800;
+  color: var(--pf-text);
+  font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+  margin-bottom: 40px;
+}
+
+/* ----- Two-column layout ----- */
+.columns {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 1024px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----- Pain list ----- */
+.painsList {
+  list-style: none;
+  display: grid;
+  gap: 24px;
+}
+.painItem {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+}
+.painIcon {
+  width: 24px;
+  height: 24px;
+  color: #ef4444;
+  margin-top: 3px;
+}
+.painTitle {
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.painText {
+  color: var(--pf-text-muted);
+}
+
+/* ----- Flow panel ----- */
+.panelMuted {
+  border-radius: 14px;
+  padding: 24px;
+  background: color-mix(in oklab, var(--pf-bg) 90%, #ffffff);
+  border: 1px solid var(--pf-border);
+}
+:global(html[data-theme="dark"]) .panelMuted {
+  background: color-mix(in oklab, var(--pf-bg) 88%, #0f1b2f);
+}
+.panelTitle {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.flowList {
+  display: grid;
+  gap: 14px;
+}
+.flowItem {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.stepCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: var(--pf-cta);
+  color: var(--pf-cta-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.stepCard {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.stepLabel {
+  font-weight: 600;
+}
+.stepHint {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+/* ----- Solutions grid / cards ----- */
+.gridCards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .gridCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .gridCards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: var(--pf-surface);
+  color: var(--pf-text);
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 220ms ease, box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+.cardIcon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  border-radius: 10px;
+  background: var(--pf-cta);
+  color: var(--pf-cta-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconSvg {
+  width: 20px;
+  height: 20px;
+}
+.cardTitle {
+  font-weight: 700;
+  margin: 8px 0 6px;
+}
+.cardDesc {
+  color: var(--pf-text-muted);
+  line-height: 1.6;
+}
+
+/* ----- Impact ----- */
+.impactWrap {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.impactGrid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+  margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .impactGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.impactCard {
+  background: #fff;
+  border: 1px solid var(--pf-border);
+  border-radius: 14px;
+  padding: 24px;
+}
+:global(html[data-theme="dark"]) .impactCard {
+  background: var(--pf-surface);
+}
+.impactValue {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #172b4d;
+  margin-bottom: 6px;
+}
+.impactLabel {
+  opacity: 0.8;
+}
+.impactNote {
+  opacity: 0.85;
+  line-height: 1.65;
+}
+
+/* ----- CTA ----- */
+.cta {
+  background: var(--pf-cta);
+  color: var(--pf-cta-fg);
+  padding: 80px 16px;
+}
+.ctaInner {
+  max-width: 950px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ctaTitle {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.2vw, 2.25rem);
+  margin-bottom: 12px;
+}
+.ctaText {
+  opacity: 0.95;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.ctaButton {
+  background: var(--pf-cta-fg) !important;
+  color: var(--pf-cta) !important;
+  border: 1px solid transparent;
+}
+.ctaButton:hover {
+  filter: brightness(0.97);
+}
+.iconRight {
+  width: 20px;
+  height: 20px;
+  margin-left: 0.5rem;
+  vertical-align: -3px;
+}
