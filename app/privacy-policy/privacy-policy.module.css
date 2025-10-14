@@ -1,0 +1,159 @@
+/* Page wrapper uses your theme tokens (see your globals) */
+.page {
+  background: var(--pf-bg);
+  color: var(--pf-text);
+  min-height: 100vh;
+}
+
+/* main section */
+.main {
+  padding-top: var(--hdr-h, 64px);
+}
+
+.section {
+  padding: clamp(48px, 6vw, 96px) 16px;
+  background: var(--pf-bg);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* header block */
+.headerBlock {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  color: var(--pf-text);
+  margin: 0 0 8px;
+}
+
+.updated {
+  color: color-mix(in oklab, var(--pf-text) 65%, transparent);
+}
+
+/* content typography */
+.content {
+  display: grid;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.h2 {
+  font-weight: 800;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  margin: 0 0 12px;
+  color: var(--pf-text);
+}
+
+.h3 {
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  margin: 12px 0 8px;
+  color: var(--pf-text);
+}
+
+.p {
+  line-height: 1.75;
+  color: color-mix(in oklab, var(--pf-text) 85%, transparent);
+  margin: 0 0 12px;
+}
+
+/* lists */
+.ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 8px;
+  color: color-mix(in oklab, var(--pf-text) 85%, transparent);
+}
+
+/* links */
+.link {
+  color: var(--pf-accent, #0ea5a5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link:hover {
+  filter: brightness(0.95);
+}
+
+/* dark theme adjustments */
+:root[data-theme="dark"] .section {
+  background: var(--pf-bg);
+}
+:root[data-theme="dark"] .link:hover {
+  filter: brightness(1.1);
+}
+
+.page {
+  background: var(--pf-bg);
+  color: var(--pf-text);
+}
+.main {
+  padding-top: var(--hdr-h);
+}
+.section {
+  padding: clamp(48px, 6vw, 80px) 16px;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.headerBlock {
+  margin-bottom: 20px;
+}
+.title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--pf-text);
+  margin: 0;
+}
+.updated {
+  color: var(--pf-text-muted);
+  margin-top: 6px;
+}
+
+.content {
+  display: grid;
+  gap: 28px;
+}
+.content > section {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+.h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+.p {
+  line-height: 1.7;
+  color: var(--pf-text);
+  opacity: 0.9;
+  margin: 0 0 10px;
+}
+.ul {
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 6px;
+}
+.link {
+  color: var(--pf-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

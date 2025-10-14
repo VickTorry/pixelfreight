@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,12 +10,12 @@ import styles from "./Footer.module.css";
 
 export function Footer() {
   const navigation = [
-    { name: "Home", href: "#" },
-    { name: "Services", href: "#services" },
-    { name: "Carriers", href: "#carriers" },
-    { name: "Brokers", href: "#brokers" },
-    { name: "Why us", href: "#why-us" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", hash: "#" },
+    { name: "Services", hash: "#services" },
+    { name: "Carriers", hash: "#carriers" },
+    { name: "Brokers", hash: "#brokers" },
+    { name: "Why us", hash: "#why-us" },
+    { name: "Contact", hash: "#contact" },
   ];
 
   // socials.ts (or inline)
@@ -38,9 +39,11 @@ type Social = {
 
 
   const legal = [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Use", href: "#" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Use", href: "/terms-of-use" },
   ];
+
+  const rooted = (hash?: string) => (hash ? `/#${hash}` : "/");
 
   const [form, setForm] = useState({ email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
@@ -129,9 +132,9 @@ type Social = {
             <ul>
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className={styles.link}>
+                  <Link href={rooted(item.hash)} className={styles.link}>
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -234,7 +237,7 @@ type Social = {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copy}>© 2024 Pixelfreight. All rights reserved.</p>
+          <p className={styles.copy}>© 2024-2026 Pixelfreight. All rights reserved.</p>
           <div className={styles.legal}>
             {legal.map((item) => (
               <a key={item.name} href={item.href} className={styles.linkSmall}>
