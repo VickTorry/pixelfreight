@@ -1,56 +1,57 @@
-/* ========== WhatWeDo.module.css (no :root, CSS-Modules safe) ========== */
-
-/* Layout to match Lovable spacing */
+/* ===== Section & container (Lovable spacing) ===== */
 .section {
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0; /* py-32 */
+  background: var(--pf-background, transparent);
+}
+.container {
   max-width: 72rem; /* ~max-w-6xl */
   margin: 0 auto;
-  padding: 8rem 1rem; /* py-32 */
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem 2rem;
+  padding: 0 1rem; /* px-4 */
+  position: relative;
+  z-index: 1;
 }
 
+/* ===== Two-column layout ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem; /* gap-16 */
+  align-items: center;
+}
 @media (min-width: 1024px) {
-  .section {
-    grid-template-columns: minmax(220px, 340px) 1fr;
-    align-items: start;
-    column-gap: 4rem; /* gap-16 */
-    row-gap: 2rem;
+  .grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Left title */
-.left {
-  position: relative;
-}
-
-.titleWrap {
+/* ===== Title with subtle hover glow ===== */
+.titleGroup {
   position: relative;
   display: inline-block;
 }
-
-.titleWrap::before {
-  content: "";
+.titleGlow {
   position: absolute;
-  inset: -6%;
-  border-radius: 1.25rem;
-  /* soft glow; use color fallbacks if tokens missing */
+  inset: -0.5rem;
+  border-radius: 1rem;
   background: linear-gradient(
     90deg,
-    color-mix(in oklab, var(--pf-primary, #14b8c5) 18%, transparent),
-    color-mix(in oklab, var(--pf-accent, #4f46e5) 18%, transparent),
-    color-mix(in oklab, var(--pf-primary, #14b8c5) 18%, transparent)
+    rgba(20, 184, 197, 0.2),
+    rgba(79, 70, 229, 0.2),
+    rgba(20, 184, 197, 0.2)
   );
-  filter: blur(28px);
+  filter: blur(24px);
   opacity: 0;
   transition: opacity 0.7s ease;
   pointer-events: none;
 }
-.titleWrap:hover::before {
+.titleGroup:hover .titleGlow {
   opacity: 1;
 }
 
 .heading {
+  margin: 0;
   font-family: var(
     --font-geist-sans,
     "Geist Sans",
@@ -63,107 +64,204 @@
   font-weight: 800;
   letter-spacing: -0.015em;
   line-height: 1.1;
-  color: var(--pf-text, #0b0b0c);
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  margin: 0;
+  color: var(--pf-foreground, #0b0b0c);
+  font-size: 3rem; /* text-5xl */
 }
+@media (min-width: 768px) {
+  .heading {
+    font-size: 3.75rem;
+  }
+} /* md:text-6xl */
+@media (min-width: 1024px) {
+  .heading {
+    font-size: 4.5rem;
+  }
+} /* lg:text-7xl */
 
-.gradientWord {
-  display: block;
-  margin-top: 0.25em;
-  background: linear-gradient(
+/* ===== FLASHLIGHT REVEAL on "do" (dark → light sweep) ===== */
+/* Keep it inline and spaced from "we" */
+.flashDo {
+  position: relative;
+  display: inline-block; /* prevents whitespace collapse */
+  margin-inline-start: 0.25ch; /* natural word gap */
+
+  /* DARK base (before Pixelfreight = "darkness") */
+  background-image: linear-gradient(
     90deg,
-    var(--pf-primary, #14b8c5),
-    var(--pf-accent, #4f46e5),
-    var(--pf-primary, #14b8c5)
+    #0b3340 0%,
+    /* deep cyan/teal */ #0d3b59 25%,
+    /* dark teal-blue */ #0f2f74 60%,
+    /* deep blue */ #151f68 100% /* indigo-ish */
   );
-  background-size: 200% auto;
+  background-size: 250% 100%;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: pfGradientShift 6s linear infinite;
+  -webkit-text-fill-color: transparent;
+
+  /* very subtle base shift so the word feels alive */
+  animation: wordBaseShift 14s linear infinite;
 }
 
-@keyframes pfGradientShift {
+/* BRIGHT overlay revealed by a moving mask (the "flashlight") */
+.flashDo::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+
+  /* Bright blue gradient (after Pixelfreight = "light") */
+  background-image: linear-gradient(
+    90deg,
+    #0ea5b7 0%,
+    #14b8c5 25%,
+    #2563eb 60%,
+    #4f46e5 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  /* Moving mask = flashlight beam with soft core and falloff */
+  -webkit-mask-image: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 1) 45%,
+    rgba(0, 0, 0, 1) 55%,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 1) 45%,
+    rgba(0, 0, 0, 1) 55%,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-size: 220% 100%;
+  mask-size: 220% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  /* Sweep + slight hue pan for coherence */
+  animation: wordBrightShift 14s linear infinite,
+    flashlightSweep 6s ease-in-out infinite;
+}
+
+/* base slow pan */
+@keyframes wordBaseShift {
   0% {
-    background-position: 0% center;
+    background-position: 0% 50%;
   }
   100% {
-    background-position: 200% center;
+    background-position: 200% 50%;
+  }
+}
+/* bright layer pan */
+@keyframes wordBrightShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+/* flashlight sweep L→R→L with a brief hold on the right */
+@keyframes flashlightSweep {
+  0% {
+    -webkit-mask-position: -40% 0;
+    mask-position: -40% 0;
+  }
+  45% {
+    -webkit-mask-position: 120% 0;
+    mask-position: 120% 0;
+  }
+  55% {
+    -webkit-mask-position: 120% 0;
+    mask-position: 120% 0;
+  } /* linger */
+  100% {
+    -webkit-mask-position: -40% 0;
+    mask-position: -40% 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .titleWrap::before {
-    transition: none;
-  }
-  .gradientWord {
+  .flashDo,
+  .flashDo::after {
     animation: none;
   }
 }
 
-/* Right column / cards */
-.right {
-  max-width: 72ch;
-  display: flex;
-  flex-direction: column;
+/* ===== Right column: Lovable-style cards ===== */
+.cards {
+  display: grid;
   gap: 1.5rem; /* space-y-6 */
+  max-width: 72ch;
 }
 
-.card,
-.cardAlt {
+.card {
   position: relative;
+  overflow: hidden;
   border-radius: 0.75rem; /* rounded-xl */
   padding: 1.5rem; /* p-6 */
-  border: 1px solid
-    color-mix(in oklab, var(--pf-border, #e6e6ea) 60%, transparent);
-  background: color-mix(in oklab, var(--pf-surface, #f7f7fb) 30%, transparent);
-  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(17, 24, 39, 0.12);
   backdrop-filter: blur(4px);
-  transition: border-color 0.35s ease, box-shadow 0.35s ease,
-    transform 0.35s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease,
+    background-color 0.5s ease;
+  will-change: transform, box-shadow, border-color, background-color;
 }
+.toneA {
+  background: rgba(2, 6, 23, 0.06);
+} /* bg-muted/30 */
+.toneB {
+  background: rgba(2, 6, 23, 0.04);
+} /* bg-muted/20 */
 
-.card:hover,
-.cardAlt:hover {
-  border-color: color-mix(
-    in oklab,
-    var(--pf-primary, #14b8c5) 40%,
-    var(--pf-border, #e6e6ea)
-  );
-  box-shadow: 0 10px 30px
-    color-mix(in oklab, var(--pf-primary, #14b8c5) 10%, transparent);
-  transform: translateY(-2px);
-}
-
-.card::before,
-.cardAlt::before {
-  content: "";
+.cardWash,
+.cardWashAlt {
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--pf-primary, #14b8c5) 8%, transparent),
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
-.cardAlt::before {
+.cardWash {
   background: linear-gradient(
     135deg,
-    color-mix(in oklab, var(--pf-accent, #4f46e5) 8%, transparent),
-    transparent 55%
+    rgba(20, 184, 197, 0.08),
+    rgba(255, 255, 255, 0)
   );
 }
-.card:hover::before,
-.cardAlt:hover::before {
+.cardWashAlt {
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.08),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.card:hover {
+  border-color: rgba(20, 184, 197, 0.3);
+  box-shadow: 0 10px 40px rgba(20, 184, 197, 0.08),
+    0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.card:hover .cardWash,
+.card:hover .cardWashAlt {
   opacity: 1;
 }
 
 .cardText {
+  position: relative;
+  z-index: 1;
+  margin: 0;
   font-family: var(
     --font-geist-sans,
     "Geist Sans",
@@ -173,21 +271,14 @@
     Roboto,
     sans-serif
   );
-  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
   line-height: 1.75;
-  color: color-mix(in oklab, var(--pf-text, #0b0b0c) 90%, white);
-  margin: 0;
+  color: rgba(11, 11, 12, 0.9);
 }
 .cardText strong {
-  color: var(--pf-text, #0b0b0c);
+  color: var(--pf-foreground, #0b0b0c);
   font-weight: 700;
 }
-.mutedAddendum {
-  color: var(--pf-text-muted, #5d6068);
-}
-
-@media (min-width: 1024px) {
-  .left {
-    margin-top: 0.25rem;
-  }
+.addendum {
+  color: rgba(11, 11, 12, 0.65);
 }
