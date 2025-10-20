@@ -2,13 +2,13 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 8rem 0; /* py-32 */
+  padding: 8rem 0;
   background: var(--pf-background, transparent);
 }
 .container {
-  max-width: 72rem; /* ~max-w-6xl */
+  max-width: 72rem;
   margin: 0 auto;
-  padding: 0 1rem; /* px-4 */
+  padding: 0 1rem;
   position: relative;
   z-index: 1;
 }
@@ -17,7 +17,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem; /* gap-16 */
+  gap: 4rem;
   align-items: center;
 }
 @media (min-width: 1024px) {
@@ -65,33 +65,30 @@
   letter-spacing: -0.015em;
   line-height: 1.1;
   color: var(--pf-foreground, #0b0b0c);
-  font-size: 3rem; /* text-5xl */
+  font-size: 3rem;
 }
 @media (min-width: 768px) {
   .heading {
     font-size: 3.75rem;
   }
-} /* md:text-6xl */
+}
 @media (min-width: 1024px) {
   .heading {
     font-size: 4.5rem;
   }
-} /* lg:text-7xl */
+}
 
-/* ===== FLASHLIGHT REVEAL on "do" (dark → light sweep) ===== */
-/* Keep it inline and spaced from "we" */
+/* ===== FLASHLIGHT REVEAL on "do" (dark → light sweep), with proper spacing ===== */
 .flashDo {
   position: relative;
-  display: inline-block; /* prevents whitespace collapse */
-  margin-inline-start: 0.25ch; /* natural word gap */
-
-  /* DARK base (before Pixelfreight = "darkness") */
+  display: inline-block;
+  margin-inline-start: 0.25ch; /* word gap */
   background-image: linear-gradient(
     90deg,
     #0b3340 0%,
-    /* deep cyan/teal */ #0d3b59 25%,
-    /* dark teal-blue */ #0f2f74 60%,
-    /* deep blue */ #151f68 100% /* indigo-ish */
+    #0d3b59 25%,
+    #0f2f74 60%,
+    #151f68 100%
   );
   background-size: 250% 100%;
   background-position: 0% 50%;
@@ -99,18 +96,12 @@
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-
-  /* very subtle base shift so the word feels alive */
   animation: wordBaseShift 14s linear infinite;
 }
-
-/* BRIGHT overlay revealed by a moving mask (the "flashlight") */
 .flashDo::after {
   content: attr(data-text);
   position: absolute;
   inset: 0;
-
-  /* Bright blue gradient (after Pixelfreight = "light") */
   background-image: linear-gradient(
     90deg,
     #0ea5b7 0%,
@@ -124,8 +115,6 @@
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-
-  /* Moving mask = flashlight beam with soft core and falloff */
   -webkit-mask-image: linear-gradient(
     120deg,
     rgba(0, 0, 0, 0) 0%,
@@ -148,13 +137,9 @@
   mask-size: 220% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-
-  /* Sweep + slight hue pan for coherence */
   animation: wordBrightShift 14s linear infinite,
     flashlightSweep 6s ease-in-out infinite;
 }
-
-/* base slow pan */
 @keyframes wordBaseShift {
   0% {
     background-position: 0% 50%;
@@ -163,7 +148,6 @@
     background-position: 200% 50%;
   }
 }
-/* bright layer pan */
 @keyframes wordBrightShift {
   0% {
     background-position: 0% 50%;
@@ -172,7 +156,6 @@
     background-position: 200% 50%;
   }
 }
-/* flashlight sweep L→R→L with a brief hold on the right */
 @keyframes flashlightSweep {
   0% {
     -webkit-mask-position: -40% 0;
@@ -185,13 +168,12 @@
   55% {
     -webkit-mask-position: 120% 0;
     mask-position: 120% 0;
-  } /* linger */
+  } /* brief hold */
   100% {
     -webkit-mask-position: -40% 0;
     mask-position: -40% 0;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
   .flashDo,
   .flashDo::after {
@@ -199,18 +181,17 @@
   }
 }
 
-/* ===== Right column: Lovable-style cards ===== */
+/* ===== Cards (Lovable-style) ===== */
 .cards {
   display: grid;
-  gap: 1.5rem; /* space-y-6 */
+  gap: 1.5rem;
   max-width: 72ch;
 }
-
 .card {
   position: relative;
   overflow: hidden;
-  border-radius: 0.75rem; /* rounded-xl */
-  padding: 1.5rem; /* p-6 */
+  border-radius: 0.75rem;
+  padding: 1.5rem;
   border: 1px solid rgba(17, 24, 39, 0.12);
   backdrop-filter: blur(4px);
   transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease,
@@ -219,18 +200,17 @@
 }
 .toneA {
   background: rgba(2, 6, 23, 0.06);
-} /* bg-muted/30 */
+} /* muted/30 */
 .toneB {
   background: rgba(2, 6, 23, 0.04);
-} /* bg-muted/20 */
-
+} /* muted/20 */
 .cardWash,
 .cardWashAlt {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s;
 }
 .cardWash {
   background: linear-gradient(
@@ -246,7 +226,6 @@
     rgba(255, 255, 255, 0)
   );
 }
-
 .card:hover {
   border-color: rgba(20, 184, 197, 0.3);
   box-shadow: 0 10px 40px rgba(20, 184, 197, 0.08),
@@ -257,7 +236,6 @@
 .card:hover .cardWashAlt {
   opacity: 1;
 }
-
 .cardText {
   position: relative;
   z-index: 1;
