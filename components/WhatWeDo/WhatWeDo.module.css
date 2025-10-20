@@ -1,20 +1,18 @@
-/* ========== WhatWeDo.module.css ========== */
-
-/* Fallback theme tokens (will be overridden by your globals if present) */
-:root {
+/* ====== Global tokens (scoped properly for CSS Modules) ====== */
+:global(:root) {
   --pf-text: #0b0b0c;
   --pf-text-muted: #5d6068;
   --pf-border: #e6e6ea;
   --pf-surface: #f7f7fb;
-  --pf-primary: #14b8c5; /* teal-ish, adjust to your brand */
-  --pf-accent: #4f46e5; /* indigo-ish, adjust to your brand */
+  --pf-primary: #14b8c5;
+  --pf-accent: #4f46e5;
   --font-geist-sans: "Geist Sans", system-ui, -apple-system, Segoe UI, Roboto,
     sans-serif;
 }
 
-/* ===== Layout: mirror Lovable (container + vertical rhythm) ===== */
+/* ===== Layout: match Lovable spacing ===== */
 .section {
-  max-width: 72rem; /* Tailwind max-w-6xl = 1152px */
+  max-width: 72rem; /* Tailwind max-w-6xl */
   margin: 0 auto;
   padding: 8rem 1rem; /* py-32 */
   display: grid;
@@ -23,16 +21,15 @@
 }
 
 @media (min-width: 1024px) {
-  /* lg */
   .section {
-    grid-template-columns: minmax(220px, 340px) 1fr; /* left title / right content */
+    grid-template-columns: minmax(220px, 340px) 1fr;
     align-items: start;
     column-gap: 4rem; /* gap-16 */
     row-gap: 2rem;
   }
 }
 
-/* ===== Left column (title with soft glow + animated 'do') ===== */
+/* ===== Left title ===== */
 .left {
   position: relative;
 }
@@ -41,7 +38,9 @@
   position: relative;
   display: inline-block;
 }
-
+.titleWrap:hover::before {
+  opacity: 1;
+}
 .titleWrap::before {
   content: "";
   position: absolute;
@@ -57,9 +56,6 @@
   opacity: 0;
   transition: opacity 0.7s ease;
   pointer-events: none;
-}
-.titleWrap:hover::before {
-  opacity: 1;
 }
 
 .heading {
@@ -97,7 +93,6 @@
   }
 }
 
-/* Motion safety */
 @media (prefers-reduced-motion: reduce) {
   .titleWrap::before {
     transition: none;
@@ -107,7 +102,7 @@
   }
 }
 
-/* ===== Right column: card stack ===== */
+/* ===== Right column / cards ===== */
 .right {
   max-width: 72ch;
   display: flex;
@@ -115,7 +110,6 @@
   gap: 1.5rem; /* space-y-6 */
 }
 
-/* Card base (Lovable-like) */
 .card,
 .cardAlt {
   position: relative;
@@ -152,7 +146,6 @@
   transition: opacity 0.35s ease;
   pointer-events: none;
 }
-
 .cardAlt::before {
   background: linear-gradient(
     135deg,
@@ -160,13 +153,11 @@
     transparent 55%
   );
 }
-
 .card:hover::before,
 .cardAlt:hover::before {
   opacity: 1;
 }
 
-/* Card text */
 .cardText {
   font-family: var(--font-geist-sans);
   font-size: clamp(1rem, 1.1vw, 1.125rem);
@@ -178,12 +169,10 @@
   color: var(--pf-text);
   font-weight: 700;
 }
-
 .mutedAddendum {
   color: var(--pf-text-muted);
 }
 
-/* Small alignment nudge for large screens if a sticky navbar reduces top air */
 @media (min-width: 1024px) {
   .left {
     margin-top: 0.25rem;
