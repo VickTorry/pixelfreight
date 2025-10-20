@@ -1,18 +1,8 @@
-/* ====== Global tokens (scoped properly for CSS Modules) ====== */
-:global(:root) {
-  --pf-text: #0b0b0c;
-  --pf-text-muted: #5d6068;
-  --pf-border: #e6e6ea;
-  --pf-surface: #f7f7fb;
-  --pf-primary: #14b8c5;
-  --pf-accent: #4f46e5;
-  --font-geist-sans: "Geist Sans", system-ui, -apple-system, Segoe UI, Roboto,
-    sans-serif;
-}
+/* ========== WhatWeDo.module.css (no :root, CSS-Modules safe) ========== */
 
-/* ===== Layout: match Lovable spacing ===== */
+/* Layout to match Lovable spacing */
 .section {
-  max-width: 72rem; /* Tailwind max-w-6xl */
+  max-width: 72rem; /* ~max-w-6xl */
   margin: 0 auto;
   padding: 8rem 1rem; /* py-32 */
   display: grid;
@@ -29,7 +19,7 @@
   }
 }
 
-/* ===== Left title ===== */
+/* Left title */
 .left {
   position: relative;
 }
@@ -38,32 +28,42 @@
   position: relative;
   display: inline-block;
 }
-.titleWrap:hover::before {
-  opacity: 1;
-}
+
 .titleWrap::before {
   content: "";
   position: absolute;
   inset: -6%;
   border-radius: 1.25rem;
+  /* soft glow; use color fallbacks if tokens missing */
   background: linear-gradient(
     90deg,
-    color-mix(in oklab, var(--pf-primary) 18%, transparent),
-    color-mix(in oklab, var(--pf-accent) 18%, transparent),
-    color-mix(in oklab, var(--pf-primary) 18%, transparent)
+    color-mix(in oklab, var(--pf-primary, #14b8c5) 18%, transparent),
+    color-mix(in oklab, var(--pf-accent, #4f46e5) 18%, transparent),
+    color-mix(in oklab, var(--pf-primary, #14b8c5) 18%, transparent)
   );
   filter: blur(28px);
   opacity: 0;
   transition: opacity 0.7s ease;
   pointer-events: none;
 }
+.titleWrap:hover::before {
+  opacity: 1;
+}
 
 .heading {
-  font-family: var(--font-geist-sans);
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
   font-weight: 800;
   letter-spacing: -0.015em;
   line-height: 1.1;
-  color: var(--pf-text);
+  color: var(--pf-text, #0b0b0c);
   font-size: clamp(2.25rem, 5vw, 4rem);
   margin: 0;
 }
@@ -73,9 +73,9 @@
   margin-top: 0.25em;
   background: linear-gradient(
     90deg,
-    var(--pf-primary),
-    var(--pf-accent),
-    var(--pf-primary)
+    var(--pf-primary, #14b8c5),
+    var(--pf-accent, #4f46e5),
+    var(--pf-primary, #14b8c5)
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -102,7 +102,7 @@
   }
 }
 
-/* ===== Right column / cards ===== */
+/* Right column / cards */
 .right {
   max-width: 72ch;
   display: flex;
@@ -115,8 +115,9 @@
   position: relative;
   border-radius: 0.75rem; /* rounded-xl */
   padding: 1.5rem; /* p-6 */
-  border: 1px solid color-mix(in oklab, var(--pf-border) 60%, transparent);
-  background: color-mix(in oklab, var(--pf-surface) 30%, transparent);
+  border: 1px solid
+    color-mix(in oklab, var(--pf-border, #e6e6ea) 60%, transparent);
+  background: color-mix(in oklab, var(--pf-surface, #f7f7fb) 30%, transparent);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   transition: border-color 0.35s ease, box-shadow 0.35s ease,
@@ -125,9 +126,13 @@
 
 .card:hover,
 .cardAlt:hover {
-  border-color: color-mix(in oklab, var(--pf-primary) 40%, var(--pf-border));
+  border-color: color-mix(
+    in oklab,
+    var(--pf-primary, #14b8c5) 40%,
+    var(--pf-border, #e6e6ea)
+  );
   box-shadow: 0 10px 30px
-    color-mix(in oklab, var(--pf-primary) 10%, transparent);
+    color-mix(in oklab, var(--pf-primary, #14b8c5) 10%, transparent);
   transform: translateY(-2px);
 }
 
@@ -139,7 +144,7 @@
   border-radius: inherit;
   background: linear-gradient(
     135deg,
-    color-mix(in oklab, var(--pf-primary) 8%, transparent),
+    color-mix(in oklab, var(--pf-primary, #14b8c5) 8%, transparent),
     transparent 55%
   );
   opacity: 0;
@@ -149,7 +154,7 @@
 .cardAlt::before {
   background: linear-gradient(
     135deg,
-    color-mix(in oklab, var(--pf-accent) 8%, transparent),
+    color-mix(in oklab, var(--pf-accent, #4f46e5) 8%, transparent),
     transparent 55%
   );
 }
@@ -159,18 +164,26 @@
 }
 
 .cardText {
-  font-family: var(--font-geist-sans);
+  font-family: var(
+    --font-geist-sans,
+    "Geist Sans",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
   font-size: clamp(1rem, 1.1vw, 1.125rem);
   line-height: 1.75;
-  color: color-mix(in oklab, var(--pf-text) 90%, white);
+  color: color-mix(in oklab, var(--pf-text, #0b0b0c) 90%, white);
   margin: 0;
 }
 .cardText strong {
-  color: var(--pf-text);
+  color: var(--pf-text, #0b0b0c);
   font-weight: 700;
 }
 .mutedAddendum {
-  color: var(--pf-text-muted);
+  color: var(--pf-text-muted, #5d6068);
 }
 
 @media (min-width: 1024px) {
