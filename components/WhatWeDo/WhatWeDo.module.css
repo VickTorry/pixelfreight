@@ -1,56 +1,191 @@
-/* outer layout */
+/* ========== WhatWeDo.module.css ========== */
+
+/* Fallback theme tokens (will be overridden by your globals if present) */
+:root {
+  --pf-text: #0b0b0c;
+  --pf-text-muted: #5d6068;
+  --pf-border: #e6e6ea;
+  --pf-surface: #f7f7fb;
+  --pf-primary: #14b8c5; /* teal-ish, adjust to your brand */
+  --pf-accent: #4f46e5; /* indigo-ish, adjust to your brand */
+  --font-geist-sans: "Geist Sans", system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+}
+
+/* ===== Layout: mirror Lovable (container + vertical rhythm) ===== */
 .section {
-  max-width: 1280px;
+  max-width: 72rem; /* Tailwind max-w-6xl = 1152px */
   margin: 0 auto;
-  padding: clamp(2rem, 6vw, 4rem) 1rem;
+  padding: 8rem 1rem; /* py-32 */
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem 2rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
+  /* lg */
   .section {
-    grid-template-columns: minmax(220px, 340px) 1fr; /* left title / right copy */
+    grid-template-columns: minmax(220px, 340px) 1fr; /* left title / right content */
     align-items: start;
+    column-gap: 4rem; /* gap-16 */
+    row-gap: 2rem;
   }
 }
 
-/* left column */
-.heading {
-  font-family: var(
-    --font-geist-sans,
-    "Geist Sans",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    sans-serif
+/* ===== Left column (title with soft glow + animated 'do') ===== */
+.left {
+  position: relative;
+}
+
+.titleWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.titleWrap::before {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--pf-primary) 18%, transparent),
+    color-mix(in oklab, var(--pf-accent) 18%, transparent),
+    color-mix(in oklab, var(--pf-primary) 18%, transparent)
   );
+  filter: blur(28px);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+.titleWrap:hover::before {
+  opacity: 1;
+}
+
+.heading {
+  font-family: var(--font-geist-sans);
   font-weight: 800;
   letter-spacing: -0.015em;
   line-height: 1.1;
   color: var(--pf-text);
-  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
-  margin: 0; /* reset */
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  margin: 0;
 }
 
-/* right column */
+.gradientWord {
+  display: block;
+  margin-top: 0.25em;
+  background: linear-gradient(
+    90deg,
+    var(--pf-primary),
+    var(--pf-accent),
+    var(--pf-primary)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: pfGradientShift 6s linear infinite;
+}
+
+@keyframes pfGradientShift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .titleWrap::before {
+    transition: none;
+  }
+  .gradientWord {
+    animation: none;
+  }
+}
+
+/* ===== Right column: card stack ===== */
 .right {
   max-width: 72ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* space-y-6 */
+}
+
+/* Card base (Lovable-like) */
+.card,
+.cardAlt {
+  position: relative;
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 1.5rem; /* p-6 */
+  border: 1px solid color-mix(in oklab, var(--pf-border) 60%, transparent);
+  background: color-mix(in oklab, var(--pf-surface) 30%, transparent);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.card:hover,
+.cardAlt:hover {
+  border-color: color-mix(in oklab, var(--pf-primary) 40%, var(--pf-border));
+  box-shadow: 0 10px 30px
+    color-mix(in oklab, var(--pf-primary) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+.card::before,
+.cardAlt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--pf-primary) 8%, transparent),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.cardAlt::before {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--pf-accent) 8%, transparent),
+    transparent 55%
+  );
+}
+
+.card:hover::before,
+.cardAlt:hover::before {
+  opacity: 1;
+}
+
+/* Card text */
+.cardText {
+  font-family: var(--font-geist-sans);
   font-size: clamp(1rem, 1.1vw, 1.125rem);
   line-height: 1.75;
-  color: var(--pf-text-muted);
+  color: color-mix(in oklab, var(--pf-text) 90%, white);
+  margin: 0;
 }
-
-.right p + p {
-  margin-top: 0.9rem;
-}
-
-.right strong {
+.cardText strong {
   color: var(--pf-text);
   font-weight: 700;
 }
 
-/* optional subtle separators if you want a bit more structure
-.section { border-top: 1px solid var(--pf-border); }
-*/
+.mutedAddendum {
+  color: var(--pf-text-muted);
+}
+
+/* Small alignment nudge for large screens if a sticky navbar reduces top air */
+@media (min-width: 1024px) {
+  .left {
+    margin-top: 0.25rem;
+  }
+}
