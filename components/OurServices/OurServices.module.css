@@ -1,71 +1,27 @@
-/* Section base */
-.servicesSection {
-  padding: clamp(5rem, 8vw, 7rem) 0;
-  background: #faf8f6;
-  position: relative;
-}
-html[data-theme="dark"] .servicesSection {
-  background: #0b111f;
+/* Compact top (hug the fold) + anchor offset so the title is visible when clicking "Services" */
+.section {
+  /* keep global bottom rhythm, compact only top */
+  padding-top: clamp(0.5rem, 2vh, 1.25rem) !important;
+  background: var(--pf-bg);
+
+  /* ensure anchor scroll doesn't hide the title under sticky header or gradient */
+  /* header = var(--hdr-h) (64px) + a little breathing room */
+  scroll-margin-top: calc(var(--hdr-h) + 72px);
 }
 
-/* Header and separator use same content width */
-.sectionHeader,
-.sectionRule,
-.timelineWrapper {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Hairline separator BEFORE the title */
-.sectionRule {
-  height: 1px;
-  /* more air above, tight to title below */
-  margin-top: 0;
-  margin-bottom: clamp(0.4rem, 1vw, 0.6rem);
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(15, 34, 51, 0.14) 18%,
-    rgba(15, 34, 51, 0.14) 82%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-html[data-theme="dark"] .sectionRule {
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(248, 250, 252, 0.18) 18%,
-    rgba(248, 250, 252, 0.18) 82%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-
-/* Title sits tight under the line */
+/* Title tight under the hairline */
 .sectionTitle {
-  margin-top: 85px;
+  margin: 0;
   text-align: center;
-  font-family: var(--font-geist-sans);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  font-size: clamp(1.75rem, 2.8vw, 2.25rem);
-  color: var(--pf-text, #0f2233);
+  color: var(--pf-text);
 }
 
-html[data-theme="dark"] .sectionTitle {
-  color: #f8fafc;
-}
-
-/* Content wrapper: larger gap under title */
+/* Content wrapper just under title */
 .timelineWrapper {
   position: relative;
-  /* vertical gap from title to content */
-  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
-
-  /* truck spacing */
+  margin-top: var(--stack-2); /* tighter to match Lovable */
   --truck-size: 32px;
-  --truck-clearance: 28px;
+  --truck-clearance: 36px; /* a bit more so truck never overlaps title */
   padding-top: calc(var(--truck-size) + var(--truck-clearance));
 }
 
@@ -86,10 +42,10 @@ html[data-theme="dark"] .sectionTitle {
   height: var(--truck-size);
   display: block;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
-  color: #0f2233;
+  color: var(--pf-text);
 }
 html[data-theme="dark"] .truckIcon {
-  color: #f8fafc;
+  color: var(--pf-text);
 }
 .faceRight {
   transform: scaleX(1);
@@ -121,32 +77,28 @@ html[data-theme="dark"] .truckIcon {
 }
 .stepItem:hover,
 .stepItem:focus-visible {
-  background: rgba(14, 165, 165, 0.06);
+  background: color-mix(in srgb, var(--pf-accent) 12%, transparent);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
+
 .title {
   margin: 0 0 0.25rem 0;
   font-weight: 800;
   font-size: 1rem;
-  color: var(--pf-text, #0f2233);
+  color: var(--pf-text);
 }
 .text {
   margin: 0 auto;
   max-width: 240px;
   font-size: 0.95rem;
   line-height: 1.55;
-  color: var(--pf-text-muted, rgba(15, 34, 51, 0.75));
+  color: var(--pf-text-muted);
 }
 
-html[data-theme="dark"] .title {
-  color: #f8fafc;
-}
-html[data-theme="dark"] .text {
-  color: rgba(248, 250, 252, 0.82);
-}
+/* Dark hover */
 html[data-theme="dark"] .stepItem:hover,
 html[data-theme="dark"] .stepItem:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in srgb, #ffffff 12%, transparent);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
 }
 

@@ -31,7 +31,7 @@ export default function OurServices() {
     const c = stepRefs.current.map((el) => {
       if (!el) return 0;
       const r = el.getBoundingClientRect();
-      return r.left + r.width / 2 - wrapRect.left; // center in wrapper coords
+      return r.left + r.width / 2 - wrapRect.left;
     });
     if (c.length) {
       setCenters(c);
@@ -63,46 +63,51 @@ export default function OurServices() {
   };
 
   return (
-    <section id="services" className={styles.servicesSection} aria-label="Our services">
-      {/* separator BEFORE title, aligned to content width */}
-      <div className={styles.sectionRule} aria-hidden="true" />
-      <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}>Our services</h2>
-      </div>
+    <section
+      id="services"
+      className={`section ${styles.section}`}
+      aria-label="Our services"
+    >
+      <div className="container">
+        {/* hairline BEFORE the title */}
+        <div className="rule" aria-hidden="true" />
 
-      <div ref={wrapperRef} className={styles.timelineWrapper}>
-        {/* floating truck */}
-        <div
-          className={styles.truck}
-          style={{
-            transform: `translateX(${truckX}px) translateX(-50%)`,
-            transitionDuration: `${durationMs}ms`,
-            opacity: ready ? 1 : 0,
-          }}
-          aria-hidden="true"
-        >
-          <div className={facingLeft ? styles.faceLeft : styles.faceRight}>
-            <Truck className={styles.truckIcon} />
+        <h2 className={`${styles.sectionTitle} h2`}>Our services</h2>
+
+        <div ref={wrapperRef} className={styles.timelineWrapper}>
+          {/* floating truck */}
+          <div
+            className={styles.truck}
+            style={{
+              transform: `translateX(${truckX}px) translateX(-50%)`,
+              transitionDuration: `${durationMs}ms`,
+              opacity: ready ? 1 : 0,
+            }}
+            aria-hidden="true"
+          >
+            <div className={facingLeft ? styles.faceLeft : styles.faceRight}>
+              <Truck className={styles.truckIcon} />
+            </div>
           </div>
-        </div>
 
-        {/* steps */}
-        <ol className={styles.stepsRow}>
-          {STEPS.map((s, i) => (
-            <li
-              key={s.title}
-              ref={(el) => { stepRefs.current[i] = el; }}
-              className={styles.stepItem}
-              tabIndex={0}
-              onMouseEnter={() => moveTo(i)}
-              onFocus={() => moveTo(i)}
-              aria-label={s.title}
-            >
-              <h3 className={styles.title}>{s.title}</h3>
-              <p className={styles.text}>{s.text}</p>
-            </li>
-          ))}
-        </ol>
+          {/* steps */}
+          <ol className={styles.stepsRow}>
+            {STEPS.map((s, i) => (
+              <li
+                key={s.title}
+                ref={(el) => { stepRefs.current[i] = el; }}
+                className={styles.stepItem}
+                tabIndex={0}
+                onMouseEnter={() => moveTo(i)}
+                onFocus={() => moveTo(i)}
+                aria-label={s.title}
+              >
+                <h3 className={styles.title}>{s.title}</h3>
+                <p className={styles.text}>{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

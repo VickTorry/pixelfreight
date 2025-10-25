@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata: Metadata = {
   title: "Pixelfreight — Websites that deliver",
   description: "We're building websites that deliver.",
@@ -45,7 +46,15 @@ export const metadata: Metadata = {
     description: "We’re building websites that deliver.",
     images: ["logo-header.png"],
   },
+  // ✅ Adds static meta tag so Ahrefs can verify the site
+  verification: {
+    other: {
+      "ahrefs-site-verification":
+        "031b21edcf90fff6e81a828d8eb4ae2c4e9ba45a4199049268167d8e5c21394",
+    },
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -82,13 +91,13 @@ export default function RootLayout({
         {/* Ahrefs Web Analytics */}
         <Script id="ahrefs-analytics" strategy="afterInteractive">
         {`
-            (function(){
+          (function(){
                 var s = document.createElement('script');
                 s.async = true;
                 s.src = 'https://analytics.ahrefs.com/analytics.js';
                 s.setAttribute('data-key', 'a6eFHO8dCMvcz2Sr2lB/Pw');
                 document.head.appendChild(s);
-            })();
+          })();
         `}
         </Script>
       </head>
