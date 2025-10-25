@@ -72,7 +72,7 @@ export default function OurServices() {
         {/* hairline BEFORE the title */}
         <div className="rule" aria-hidden="true" />
 
-        <h2 className={`${styles.sectionTitle} h2`}>Our services</h2>
+        <h2 className={`${styles.sectionTitle} h2`}>Our process</h2>
 
         <div ref={wrapperRef} className={styles.timelineWrapper}>
           {/* floating truck */}

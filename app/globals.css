@@ -1,5 +1,5 @@
 /* ===================================
-   PIXELFREIGHT GLOBAL STYLES
+   PIXELFREIGHT GLOBAL STYLES (FINAL)
    =================================== */
 
 /* ========== THEME TOKENS ========== */
@@ -7,8 +7,9 @@
 /* Light (default) */
 :root,
 html[data-theme="light"] {
-  --pf-bg: #faf8f6; /* Page background */
-  --pf-surface: rgba(255, 255, 255, 0.95); /* Panels / cards */
+  --pf-bg: #faf8f6; /* Global page background */
+  --pf-bg-alt: #f4f2f0; /* Optional subtle contrast section */
+  --pf-surface: rgba(255, 255, 255, 0.95); /* Cards / panels */
   --pf-text: #0f2233; /* Main text */
   --pf-text-muted: #4b5563; /* Secondary text */
   --pf-border: rgba(0, 0, 0, 0.1); /* Dividers */
@@ -22,19 +23,20 @@ html[data-theme="light"] {
 
 /* Dark */
 html[data-theme="dark"] {
-  --pf-bg: #0b1220; /* Deep night background */
-  --pf-surface: #1a2235; /* Cards / panels */
-  --pf-text: #e6e9f0; /* Main text */
-  --pf-text-muted: #aab4c5; /* Secondary text */
+  --pf-bg: #0b1220; /* Global dark background */
+  --pf-bg-alt: #101829; /* Optional dark contrast section */
+  --pf-surface: #1a2235;
+  --pf-text: #e6e9f0;
+  --pf-text-muted: #aab4c5;
   --pf-border: rgba(255, 255, 255, 0.12);
-  --pf-accent: #f8d361; /* Amber accent */
-  --pf-accent-hover: #f9ce3f; /* Hover amber */
-  --pf-cta: #f8d361; /* Buttons in dark */
-  --pf-cta-fg: #0b1220; /* Button text in dark */
-  --pf-gray: #374151; /* Neutral dark */
+  --pf-accent: #f8d361;
+  --pf-accent-hover: #f9ce3f;
+  --pf-cta: #f8d361;
+  --pf-cta-fg: #0b1220;
+  --pf-gray: #374151;
 }
 
-/* Map legacy tokens -> new tokens so older CSS keeps working */
+/* Map legacy tokens for compatibility */
 :root,
 html[data-theme="light"],
 html[data-theme="dark"] {
@@ -43,6 +45,7 @@ html[data-theme="dark"] {
 }
 
 /* ========== BASE ========== */
+
 html,
 body {
   background: var(--pf-bg);
@@ -82,17 +85,18 @@ a {
 }
 
 /* ===== Layout primitives (site-wide) ===== */
+
 :root {
   /* vertical rhythm */
   --section-y: clamp(5rem, 8vw, 7rem);
-  --stack-1: 0.75rem; /* tight */
+  --stack-1: 0.75rem;
   --stack-2: 1rem;
   --stack-3: 1.5rem;
-  --stack-4: 2rem; /* default */
+  --stack-4: 2rem;
   --stack-5: 2.5rem;
 
   /* container */
-  --container: 72rem; /* ~1152px, matches your current design */
+  --container: 72rem;
   --gutter: 1rem;
 
   /* typography scale */
@@ -101,11 +105,11 @@ a {
   --h3: clamp(1.125rem, 2vw, 1.25rem);
   --body: clamp(1rem, 1.15vw, 1.125rem);
 
-  /* text measure for comfortable reading */
+  /* text measure */
   --measure: 72ch;
 }
 
-/* universal container & section padding */
+/* Universal container & section base */
 .container {
   max-width: var(--container);
   margin: 0 auto;
@@ -113,9 +117,13 @@ a {
 }
 .section {
   padding-block: var(--section-y);
+  background: var(--pf-bg);
+}
+.section--alt {
+  background: var(--pf-bg-alt);
 }
 
-/* headings */
+/* Headings */
 .h1,
 .h2,
 .h3 {
@@ -143,7 +151,7 @@ a {
   font-size: var(--h3);
 }
 
-/* paragraph defaults & readable width helper */
+/* Paragraphs */
 p {
   font-size: var(--body);
   line-height: 1.7;
@@ -153,7 +161,7 @@ p {
   max-width: var(--measure);
 }
 
-/* vertical spacing helpers */
+/* Vertical stacks */
 .stack > * + * {
   margin-top: var(--stack-4);
 }
@@ -164,7 +172,7 @@ p {
   margin-top: var(--stack-5);
 }
 
-/* horizontal rows */
+/* Horizontal rows */
 .row {
   display: flex;
   gap: var(--stack-3);
@@ -176,7 +184,7 @@ p {
   flex-wrap: wrap;
 }
 
-/* hairline separator */
+/* Hairline separator */
 .rule {
   height: 1px;
   background: linear-gradient(
@@ -186,8 +194,6 @@ p {
     transparent
   );
 }
-
-/* dark mode parity for primitives */
 html[data-theme="dark"] .rule {
   background: linear-gradient(
     to right,
@@ -197,13 +203,13 @@ html[data-theme="dark"] .rule {
   );
 }
 
-/* reusable “card” */
+/* Card component */
 .card {
   position: relative;
   border: 1px solid var(--pf-border);
   border-radius: 12px;
   padding: var(--stack-4);
-  background: rgba(2, 6, 23, 0.04);
+  background: var(--pf-surface);
   backdrop-filter: blur(4px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -215,6 +221,6 @@ html[data-theme="dark"] .rule {
   margin: 0;
 }
 html[data-theme="dark"] .card {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--pf-surface);
   border-color: rgba(248, 250, 252, 0.12);
 }
