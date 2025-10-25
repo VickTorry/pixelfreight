@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   verification: {
     other: {
       "ahrefs-site-verification":
-        "031b21edcf90fff6e81a828d8eb4ae2c4e9ba45a4199049268167d8e5c21394",
+        "1250324624ee53f91e96d0c6851dc94c69e2c9d847c0425a080ef654e693c81a",
     },
   },
 };

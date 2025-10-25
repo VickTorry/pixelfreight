@@ -11,7 +11,7 @@ import styles from "./Header.module.css";
 
 const navigation = [
   { name: "Home",   hash: "" },            
-  { name: "Services", hash: "services" },  
+  { name: "Services", hash: "what-we-do" },  
   { name: "Carriers", hash: "carriers" },
   { name: "Brokers",  hash: "brokers" },   
   { name: "Why us",   hash: "why-us" },
