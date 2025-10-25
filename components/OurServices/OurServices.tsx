@@ -24,7 +24,6 @@ export default function OurServices() {
   const [facingLeft, setFacingLeft] = useState<boolean>(false);
   const prevX = useRef<number>(0);
 
-  // measure step centers relative to wrapper and park the truck at step 1
   const measure = () => {
     const wrap = wrapperRef.current;
     if (!wrap) return;
@@ -32,7 +31,7 @@ export default function OurServices() {
     const c = stepRefs.current.map((el) => {
       if (!el) return 0;
       const r = el.getBoundingClientRect();
-      return r.left + r.width / 2 - wrapRect.left; // center X in wrapper coords
+      return r.left + r.width / 2 - wrapRect.left; // center in wrapper coords
     });
     if (c.length) {
       setCenters(c);
@@ -43,18 +42,14 @@ export default function OurServices() {
   };
 
   useLayoutEffect(() => {
-    // initial & next-tick measure (handles font/CLS)
     measure();
     const t = window.setTimeout(measure, 0);
-
     const onResize = () => measure();
     window.addEventListener("resize", onResize);
-
     return () => {
       clearTimeout(t);
       window.removeEventListener("resize", onResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const moveTo = (idx: number) => {
@@ -69,8 +64,14 @@ export default function OurServices() {
 
   return (
     <section id="services" className={styles.servicesSection} aria-label="Our services">
+      {/* separator BEFORE title, aligned to content width */}
+      <div className={styles.sectionRule} aria-hidden="true" />
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>Our services</h2>
+      </div>
+
       <div ref={wrapperRef} className={styles.timelineWrapper}>
-        {/* Truck (no rails/circles). Outer moves; inner flips left/right. */}
+        {/* floating truck */}
         <div
           className={styles.truck}
           style={{
@@ -85,7 +86,7 @@ export default function OurServices() {
           </div>
         </div>
 
-        {/* Steps (entire li is the hover/focus target) */}
+        {/* steps */}
         <ol className={styles.stepsRow}>
           {STEPS.map((s, i) => (
             <li

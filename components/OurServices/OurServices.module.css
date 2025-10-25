@@ -1,8 +1,6 @@
-/* components/OurServices/OurServices.module.css */
-/* Truck above headings; whole step is hover target; no rails/circles/numbers */
-
+/* Section base */
 .servicesSection {
-  padding: clamp(3rem, 6vw, 4rem) 0;
+  padding: clamp(5rem, 8vw, 7rem) 0;
   background: #faf8f6;
   position: relative;
 }
@@ -10,20 +8,68 @@ html[data-theme="dark"] .servicesSection {
   background: #0b111f;
 }
 
-/* Reserve vertical space for the truck here */
+/* Header and separator use same content width */
+.sectionHeader,
+.sectionRule,
 .timelineWrapper {
-  position: relative;
-  max-width: 1280px;
+  max-width: 72rem;
   margin: 0 auto;
   padding: 0 2rem;
+}
 
-  /* tune once and forget */
-  --truck-size: 32px; /* icon size */
-  --truck-clearance: 28px; /* gap under the truck */
+/* Hairline separator BEFORE the title */
+.sectionRule {
+  height: 1px;
+  /* more air above, tight to title below */
+  margin-top: 0;
+  margin-bottom: clamp(0.4rem, 1vw, 0.6rem);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(15, 34, 51, 0.14) 18%,
+    rgba(15, 34, 51, 0.14) 82%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+html[data-theme="dark"] .sectionRule {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(248, 250, 252, 0.18) 18%,
+    rgba(248, 250, 252, 0.18) 82%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Title sits tight under the line */
+.sectionTitle {
+  margin-top: 85px;
+  text-align: center;
+  font-family: var(--font-geist-sans);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+  color: var(--pf-text, #0f2233);
+}
+
+html[data-theme="dark"] .sectionTitle {
+  color: #f8fafc;
+}
+
+/* Content wrapper: larger gap under title */
+.timelineWrapper {
+  position: relative;
+  /* vertical gap from title to content */
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+
+  /* truck spacing */
+  --truck-size: 32px;
+  --truck-clearance: 28px;
   padding-top: calc(var(--truck-size) + var(--truck-clearance));
 }
 
-/* Truck sits at the very top of the wrapper */
+/* Truck at top of wrapper */
 .truck {
   position: absolute;
   top: 0;
@@ -31,7 +77,7 @@ html[data-theme="dark"] .servicesSection {
   transform: translateX(0) translateX(-50%);
   transition-property: transform, opacity;
   transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
-  opacity: 0; /* fades in after first measure */
+  opacity: 0;
   z-index: 2;
   pointer-events: none;
 }
@@ -52,8 +98,7 @@ html[data-theme="dark"] .truckIcon {
   transform: scaleX(-1);
 }
 
-/* Steps row now has **no extra top margin**; the wrapper’s padding-top
-   guarantees the headings never collide with the truck */
+/* Steps row */
 .stepsRow {
   display: flex;
   justify-content: space-between;
@@ -92,6 +137,7 @@ html[data-theme="dark"] .truckIcon {
   line-height: 1.55;
   color: var(--pf-text-muted, rgba(15, 34, 51, 0.75));
 }
+
 html[data-theme="dark"] .title {
   color: #f8fafc;
 }
@@ -104,7 +150,7 @@ html[data-theme="dark"] .stepItem:focus-visible {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
 }
 
-/* Mobile: hide truck (optional) and present clean vertical list */
+/* Mobile */
 @media (max-width: 768px) {
   .stepsRow {
     flex-direction: column;

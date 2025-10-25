@@ -71,3 +71,136 @@ a {
 :root {
   --hdr-h: 64px;
 }
+
+/* ===== Layout primitives (site-wide) ===== */
+:root {
+  /* vertical rhythm */
+  --section-y: clamp(5rem, 8vw, 7rem);
+  --stack-1: 0.75rem; /* tight */
+  --stack-2: 1rem;
+  --stack-3: 1.5rem;
+  --stack-4: 2rem; /* default */
+  --stack-5: 2.5rem;
+
+  /* container */
+  --container: 72rem; /* ~1152px, matches your current design */
+  --gutter: 1rem;
+
+  /* typography scale */
+  --h1: clamp(2.25rem, 5vw, 3.5rem);
+  --h2: clamp(1.75rem, 3.5vw, 2.5rem);
+  --h3: clamp(1.125rem, 2vw, 1.25rem);
+  --body: clamp(1rem, 1.15vw, 1.125rem);
+
+  /* text measure for comfortable reading */
+  --measure: 72ch;
+}
+
+/* universal container & section padding */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+.section {
+  padding-block: var(--section-y);
+}
+
+/* headings */
+.h1,
+.h2,
+.h3 {
+  font-family: var(
+    --font-geist-sans,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif
+  );
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--pf-text);
+}
+.h1 {
+  font-size: var(--h1);
+}
+.h2 {
+  font-size: var(--h2);
+}
+.h3 {
+  font-size: var(--h3);
+}
+
+/* paragraph defaults & readable width helper */
+p {
+  font-size: var(--body);
+  line-height: 1.7;
+  color: var(--pf-text);
+}
+.text-measure {
+  max-width: var(--measure);
+}
+
+/* vertical spacing helpers */
+.stack > * + * {
+  margin-top: var(--stack-4);
+}
+.stack-tight > * + * {
+  margin-top: var(--stack-2);
+}
+.stack-loose > * + * {
+  margin-top: var(--stack-5);
+}
+
+/* horizontal rows */
+.row {
+  display: flex;
+  gap: var(--stack-3);
+  flex-wrap: wrap;
+}
+.row-tight {
+  display: flex;
+  gap: var(--stack-2);
+  flex-wrap: wrap;
+}
+
+/* hairline separator */
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(15, 34, 51, 0.14),
+    transparent
+  );
+}
+
+/* dark mode parity for primitives */
+html[data-theme="dark"] .rule {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(248, 250, 252, 0.18),
+    transparent
+  );
+}
+
+/* reusable “card” */
+.card {
+  position: relative;
+  border: 1px solid var(--pf-border);
+  border-radius: 12px;
+  padding: var(--stack-4);
+  background: rgba(2, 6, 23, 0.04);
+  backdrop-filter: blur(4px);
+}
+.card p {
+  margin: 0;
+}
+html[data-theme="dark"] .card {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(248, 250, 252, 0.12);
+}

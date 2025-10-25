@@ -27,13 +27,12 @@ type Social = {
 };
 
  const social: Social[] = [
-  { name: "LinkedIn", href: "#" },
-  { name: "Facebook", href: "#" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/pixelfreight/", target: "_blank", rel: "noopener noreferrer" },
   {
     name: "Clutch",
     href: "https://clutch.co/profile/pixelfreight?utm_source=clutch_top_company_badge&utm_medium=image_embed&badge=14232",
     target: "_blank",
-    rel: "noopener noreferrer", // important
+    rel: "noopener noreferrer", 
   },
 ];
 
@@ -209,7 +208,7 @@ type Social = {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Your email *"
+                  placeholder="Email *"
                   value={form.email}
                   onChange={handleChange}
                   required
@@ -217,7 +216,7 @@ type Social = {
                 />
                 <textarea
                   name="message"
-                  placeholder="Your message *"
+                  placeholder="Message *"
                   value={form.message}
                   onChange={handleChange}
                   rows={4}
@@ -237,7 +236,7 @@ type Social = {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copy}>© 2024-2026 Pixelfreight. All rights reserved.</p>
+          <p className={styles.copy}>© 2026 Pixelfreight. All rights reserved.</p>
           <div className={styles.legal}>
             {legal.map((item) => (
               <a key={item.name} href={item.href} className={styles.linkSmall}>

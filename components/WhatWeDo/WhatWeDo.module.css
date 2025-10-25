@@ -2,7 +2,7 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 8rem 0;
+  padding: clamp(5rem, 8vw, 7rem) 0;
   background: var(--pf-background, transparent);
 }
 .container {

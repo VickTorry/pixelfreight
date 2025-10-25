@@ -8,22 +8,22 @@ import { Button } from "@/components/ui/ButtonWrapper/button";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
 import styles from "./Header.module.css";
 
-/** Section links: use hashes (without '#'); we'll root them to '/#...' */
+
 const navigation = [
-  { name: "Home",   hash: "" },            // -> "/"
-  { name: "Services", hash: "services" },  // -> "/#services"
+  { name: "Home",   hash: "" },            
+  { name: "Services", hash: "services" },  
   { name: "Carriers", hash: "carriers" },
-  { name: "Brokers",  hash: "brokers" },   // <-- insert Consulting AFTER this
+  { name: "Brokers",  hash: "brokers" },   
   { name: "Why us",   hash: "why-us" },
   { name: "Contact",  hash: "contact" },
 ];
 
 const consultingPages = [
-  { name: "Supply chain consulting", href: "/consulting/supply-chain" },
-  { name: "IT & product company consulting", href: "/consulting/it-product" },
-  { name: "SEO & content consulting", href: "/consulting/seo-content" },
-  { name: "Custom software consulting", href: "/consulting/custom-software" },
-  { name: "Website consulting & building", href: "/consulting/website" },
+  { name: "3PL and Carrier operations", href: "/consulting/supply-chain" },
+  { name: "Product and service", href: "/consulting/it-product" },
+  { name: "SEO & content", href: "/consulting/seo-content" },
+  { name: "Custom software", href: "/consulting/custom-software" },
+  { name: "Website and social media", href: "/consulting/website" },
 ];
 
 /** Build a rooted hash URL so section links work from any route */
