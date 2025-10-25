@@ -1,28 +1,37 @@
+/* ===================================
+   PIXELFREIGHT GLOBAL STYLES
+   =================================== */
+
 /* ========== THEME TOKENS ========== */
+
 /* Light (default) */
 :root,
 html[data-theme="light"] {
-  --pf-bg: #faf8f6;
-  --pf-surface: rgba(255, 255, 255, 0.95);
-  --pf-text: #111827;
-  --pf-text-muted: rgba(17, 17, 17, 0.7);
-  --pf-border: rgba(0, 0, 0, 0.1);
-  --pf-accent: #0ea5a5; /* link/underline in light */
-  --pf-cta: #0f2233; /* buttons in light */
-  --pf-cta-fg: #ffffff;
-  --pf-yellow: #f8d361;
+  --pf-bg: #faf8f6; /* Page background */
+  --pf-surface: rgba(255, 255, 255, 0.95); /* Panels / cards */
+  --pf-text: #0f2233; /* Main text */
+  --pf-text-muted: #4b5563; /* Secondary text */
+  --pf-border: rgba(0, 0, 0, 0.1); /* Dividers */
+  --pf-accent: #0ea5a5; /* Accent teal */
+  --pf-accent-hover: #14b8c5; /* Brighter hover teal */
+  --pf-cta: #0f2233; /* CTA button background */
+  --pf-cta-fg: #ffffff; /* CTA text color */
+  --pf-yellow: #f8d361; /* Optional highlight */
+  --pf-gray: #e5e7eb; /* Neutral backgrounds */
 }
 
-/* Dark (matches your reference) */
+/* Dark */
 html[data-theme="dark"] {
-  --pf-bg: #0b1220; /* page background */
-  --pf-surface: rgba(15, 23, 42, 0.9); /* header/panels */
-  --pf-text: #e6e9f0;
-  --pf-text-muted: #aab4c5;
-  --pf-border: rgba(148, 163, 184, 0.18);
-  --pf-accent: #f8d361; /* amber for hovers/underline */
-  --pf-cta: #f8d361; /* buttons in dark */
-  --pf-cta-fg: #0b1220;
+  --pf-bg: #0b1220; /* Deep night background */
+  --pf-surface: #1a2235; /* Cards / panels */
+  --pf-text: #e6e9f0; /* Main text */
+  --pf-text-muted: #aab4c5; /* Secondary text */
+  --pf-border: rgba(255, 255, 255, 0.12);
+  --pf-accent: #f8d361; /* Amber accent */
+  --pf-accent-hover: #f9ce3f; /* Hover amber */
+  --pf-cta: #f8d361; /* Buttons in dark */
+  --pf-cta-fg: #0b1220; /* Button text in dark */
+  --pf-gray: #374151; /* Neutral dark */
 }
 
 /* Map legacy tokens -> new tokens so older CSS keeps working */
@@ -196,6 +205,11 @@ html[data-theme="dark"] .rule {
   padding: var(--stack-4);
   background: rgba(2, 6, 23, 0.04);
   backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 .card p {
   margin: 0;

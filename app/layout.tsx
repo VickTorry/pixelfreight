@@ -79,6 +79,18 @@ export default function RootLayout({
             })(window, document, "clarity", "script", "szcfx00kwr");
           `}
         </Script>
+        {/* Ahrefs Web Analytics */}
+        <Script id="ahrefs-analytics" strategy="afterInteractive">
+        {`
+            (function(){
+                var s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://analytics.ahrefs.com/analytics.js';
+                s.setAttribute('data-key', 'a6eFHO8dCMvcz2Sr2lB/Pw');
+                document.head.appendChild(s);
+            })();
+        `}
+        </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
