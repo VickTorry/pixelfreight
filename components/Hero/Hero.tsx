@@ -16,7 +16,7 @@ export default function Hero() {
       <div className={styles.content}>
         <div>
           <h1 className={styles.headline}>
-            Websites that <span className={styles.primaryHighlight}>deliver</span>.
+            Consulting that <span className={styles.primaryHighlight}>deliver</span>.
           </h1>
 
           <p className={styles.subheadline}>
