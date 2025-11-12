@@ -236,7 +236,7 @@ type Social = {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copy}>© 2026 Pixelfreight. All rights reserved.</p>
+          <p className={styles.copy}>© 2026 Pixelfreight. Based in Ukraine. All rights reserved.</p>
           <div className={styles.legal}>
             {legal.map((item) => (
               <a key={item.name} href={item.href} className={styles.linkSmall}>
